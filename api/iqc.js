@@ -10,7 +10,7 @@ module.exports = {
 
     const buffer = await getBuffer(`https://api.fikmydomainsz.xyz/imagecreator/iqc?time=14.20&battery=75&messageText=${encodeURIComponent(text)}&provider=indosat`);
     res.writeHead(200, {
-      'Content-Type': 'image/gif',
+      'Content-Type': 'image/image',
       'Content-Length': buffer.length,
     });
     res.end(buffer);
