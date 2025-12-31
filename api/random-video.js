@@ -7,7 +7,7 @@ module.exports = {
 
     const buffer = await getBuffer(`https://api.fikmydomainsz.xyz/random/randomvid`);
     res.writeHead(200, {
-      'Content-Type': 'video/video',
+      'Content-Type': 'Media/video',
       'Content-Length': buffer.length,
     });
     res.end(buffer);
