@@ -4,6 +4,7 @@ module.exports = {
   name: "TextToImage",
   desc: "Mengubah teks menjadi gambar dengan Pollinations AI",
   category: "Tools",
+  path: "/tools/aiimage?prompt=",
   params: ["prompt"],
   async run(req, res) {
     const { prompt } = req.query;
