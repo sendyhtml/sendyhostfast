@@ -2,13 +2,9 @@ module.exports = {
   name: "KTP Maker",
   desc: "create ktp generate",
   category: "Imagecreator",
-  path: "/imagecreator/ktpmaker?apikey=&waktu=&hari=&nama=&kelas=&text=",
+  path: "/imagecreator/ktpmaker?nama=&nik=&ttl=&jk=&alamat=&agama=&status=&pekerjaan=&kewarganegaraan=&image=",
   async run(req, res) {
-    const { apikey, nama, nik, ttl, jk, alamat, agama, status, pekerjaan, kewarganegaraan, image } = req.query;
-    
-    if (!apikey || !global.apikey.includes(apikey)) {
-      return res.json({ status: false, error: 'Apikey invalid' });
-    }
+    const { nama, nik, ttl, jk, alamat, agama, status, pekerjaan, kewarganegaraan, image } = req.query;
 
     if (!nama || !nik || !ttl || !jk || !alamat || !agama || !status || !pekerjaan || !kewarganegaraan || !image) {
       return res.json({ status: false, error: 'semua wajib diisi' });
