@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 module.exports = {
-  name: "Create Logo Chibi",
+  name: "Create Logo Chibi V1",
   desc: "Mengubah teks menjadi Logo Chibi Keren",
   category: "Imagecreator",
   path: "/imagecreator/logochibi?name=",
@@ -19,8 +19,8 @@ module.exports = {
     try {
       const seed =
         Date.now().toString() + Math.floor(Math.random() * 1e6).toString();
-      const imageUrl = `https://api-sendyhost.vercel.app/imagecreator/aiimage?prompt=Buatkan%20Logo%20Anime%20Chibi%20Dengan%20Nama%20${encodeURIComponent(
-        name)}`;
+      const imageUrl = `https://api-sendyhost.vercel.app/imagecreator/aiimage?prompt=Buatkan%20Logo%20Anime%20Chibi%20Dengan%20Nama%20yang%20diminta%20Berikut%20ini:%20
+      ${encodeURIComponent(name)}`;
 
       // ambil gambar langsung sebagai buffer
       const response = await axios.get(imageUrl, { responseType: "arraybuffer" });
