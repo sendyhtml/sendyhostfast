@@ -59,7 +59,7 @@ const settings = {
   creatorName: "Sendyhost",
   apiTitle: "SendyHost API's",
   channelLink: "https://t.me/sendyofc", 
-  githubLink: "https://t.me/sendyofc", 
+  githubLink: "https://t.me/sendyrm", 
   contactLink: "https://t.me/sendyhost"
 };
 
