@@ -20,8 +20,7 @@ module.exports = {
       const seed =
         Date.now().toString() + Math.floor(Math.random() * 1e6).toString();
       const imageUrl = `https://api-sendyhost.vercel.app/imagecreator/aiimage?prompt=Buatkan%20Logo%20Anime%20Chibi%20Dengan%20Tulisan%20Nama%20${encodeURIComponent(
-        name
-      )}?seed=${seed}&enhance=true&nologo=true&model=flux`;
+        name)}`;
 
       // ambil gambar langsung sebagai buffer
       const response = await axios.get(imageUrl, { responseType: "arraybuffer" });
