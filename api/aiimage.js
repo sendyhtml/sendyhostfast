@@ -1,10 +1,10 @@
 const axios = require("axios");
 
 module.exports = {
-  name: "TextToImage",
+  name: "Ai Image",
   desc: "Mengubah teks menjadi gambar dengan Pollinations AI",
-  category: "Tools",
-  path: "/tools/aiimage?prompt=",
+  category: "Imagecreator",
+  path: "/imagecreator/aiimage?prompt=",
   params: ["prompt"],
   async run(req, res) {
     const { prompt } = req.query;
