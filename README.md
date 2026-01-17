@@ -1,4 +1,4 @@
-# 🤖 WEBSITE FAST API SendyHost 💫
+# 🤖 WEBSITE API SendyHost 💫
 - A simple api for bot whatsapp & Telegram
 - By SendyHosting
 
