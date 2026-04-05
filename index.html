@@ -3,15 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title id="page">SendyHost API's · Terminal Studio</title>
+  <title>SendyHost API's · Terminal Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- JetBrains Mono + Inter -->
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:opsz,wght@14..32,300;14..32,500;14..32,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:opsz,wght@14..32,300;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  
   <style>
-    /* RESET & GLOBAL — dark mode permanen futuristik + biru neon */
     * {
       margin: 0;
       padding: 0;
@@ -39,7 +36,6 @@
       overflow-x: hidden;
     }
 
-    /* background effect: grid + glow futuristik */
     body::before {
       content: '';
       position: fixed;
@@ -69,7 +65,6 @@
       100% { opacity: 1; transform: scale(1.15); }
     }
 
-    /* loading screen */
     #loading-screen {
       position: fixed;
       inset: 0;
@@ -103,7 +98,6 @@
       font-size: 0.85rem;
     }
 
-    /* navbar */
     .navbar {
       background: rgba(8, 12, 25, 0.85);
       backdrop-filter: blur(14px);
@@ -128,13 +122,12 @@
       font-weight: 700;
       background: linear-gradient(135deg, #a5d8ff, #3b82f6, #2563eb);
       -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
       background-clip: text;
+      color: transparent;
       letter-spacing: -0.5px;
       text-shadow: 0 0 8px #3b82f660;
     }
 
-    /* sidebar toggle */
     .sidebar-toggle {
       width: 30px;
       height: 24px;
@@ -160,7 +153,6 @@
     body.sidebar-open .sidebar-toggle .bar:nth-child(2) { opacity: 0; }
     body.sidebar-open .sidebar-toggle .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); background: #f0f9ff; }
 
-    /* sidebar */
     .sidebar {
       position: fixed;
       top: 0;
@@ -213,14 +205,12 @@
       color: white;
     }
 
-    /* container utama */
     .container {
       max-width: 1400px;
       margin: 2rem auto;
       padding: 0 2rem;
     }
 
-    /* hero */
     .hero {
       margin-bottom: 2.5rem;
       border-left: 4px solid #3b82f6;
@@ -231,16 +221,15 @@
       font-weight: 700;
       background: linear-gradient(to right, #fff, #90caf9, #3b82f6);
       -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
     }
     .hero p {
       color: #7e9bc0;
       margin-top: 0.5rem;
       font-size: 0.95rem;
-      letter-spacing: 0.3px;
     }
 
-    /* ========== TERMINAL JENDELA FUTURISTIK (TAMBAHAN BARU) ========== */
     .terminal-dashboard {
       margin-bottom: 3rem;
       position: relative;
@@ -253,7 +242,6 @@
       border: 1px solid #2b6eff80;
       box-shadow: 0 25px 40px -12px black, 0 0 0 1px rgba(0, 170, 255, 0.2), 0 0 25px rgba(0, 100, 255, 0.3);
       overflow: hidden;
-      transition: 0.2s;
     }
     .terminal-header {
       background: #030717cc;
@@ -265,16 +253,8 @@
       gap: 12px;
       border-bottom: 1px solid #2b6eff70;
     }
-    .term-controls {
-      display: flex;
-      gap: 10px;
-    }
-    .term-dot {
-      width: 13px;
-      height: 13px;
-      border-radius: 50%;
-      background: #ff5f56;
-    }
+    .term-controls { display: flex; gap: 10px; }
+    .term-dot { width: 13px; height: 13px; border-radius: 50%; background: #ff5f56; }
     .term-dot.yellow { background: #ffbd2e; }
     .term-dot.green { background: #27c93f; }
     .term-path {
@@ -291,14 +271,12 @@
       padding: 0.2rem 1rem;
       border-radius: 60px;
       color: #2effb0;
-      font-weight: 500;
     }
     .terminal-body-scroll {
       max-height: 320px;
       overflow-y: auto;
       padding: 1.2rem 1.5rem;
     }
-    .terminal-body-scroll::-webkit-scrollbar { width: 4px; }
     .endpoint-terminal-list {
       display: flex;
       flex-direction: column;
@@ -314,6 +292,7 @@
       font-family: 'JetBrains Mono', monospace;
       border-left: 2px solid #2b6eff;
       transition: 0.15s;
+      cursor: pointer;
     }
     .terminal-row:hover {
       background: #121b34;
@@ -334,7 +313,6 @@
       color: #cfe2ff;
       flex: 1;
       margin-left: 1rem;
-      word-break: break-all;
     }
     .status-active-badge {
       display: flex;
@@ -353,21 +331,14 @@
       display: flex;
       justify-content: space-between;
       font-size: 0.7rem;
-      font-family: monospace;
     }
-    .server-url-term {
-      color: #6b9eff;
-    }
-    .watch-animation {
-      animation: blinkText 1.5s infinite;
-      color: #5effa3;
-    }
+    .server-url-term { color: #6b9eff; }
+    .watch-animation { animation: blinkText 1.5s infinite; color: #5effa3; }
     @keyframes blinkText {
       0% { opacity: 0.6; text-shadow: 0 0 0 #0f0; }
       100% { opacity: 1; text-shadow: 0 0 4px #2effaa; }
     }
 
-    /* tabs & API grid (existing) */
     .tabs {
       display: flex;
       gap: 0.5rem;
@@ -419,7 +390,7 @@
     @keyframes cardGlowIn { to { opacity: 1; transform: translateY(0); } }
     .api-card:hover {
       border-color: #3b82f6;
-      box-shadow: 0 0 25px #2563eb, 0 10px 25px -5px #0f2b5c;
+      box-shadow: 0 0 25px #2563eb;
       transform: translateY(-4px);
     }
     .api-info h3 {
@@ -465,7 +436,6 @@
       border-color: white;
     }
 
-    /* modal */
     .modal {
       position: fixed;
       inset: 0;
@@ -480,10 +450,7 @@
       transition: 0.3s;
       padding: 1rem;
     }
-    .modal.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
+    .modal.active { opacity: 1; pointer-events: auto; }
     .modal-dialog {
       background: #0d1326ee;
       border: 1px solid #2563eb;
@@ -519,12 +486,7 @@
       gap: 0.5rem;
       margin: 1rem 0;
     }
-    #copyEndpointText {
-      flex: 1;
-      font-family: monospace;
-      font-size: 0.8rem;
-      color: #b8d1ff;
-    }
+    #copyEndpointText { flex: 1; font-family: monospace; font-size: 0.8rem; color: #b8d1ff; }
     #copyUrlBtn {
       background: #1e3a8a;
       border: none;
@@ -561,96 +523,20 @@
       overflow: auto;
     }
     .d-none { display: none !important; }
-
-    @media (max-width: 700px) {
-      .container { padding: 0 1rem; }
-      .terminal-header { flex-direction: column; align-items: flex-start; }
-    }
+    @media (max-width: 700px) { .container { padding: 0 1rem; } .terminal-header { flex-direction: column; align-items: flex-start; } }
   </style>
 </head>
 <body>
-  <div id="loading-screen">
-    <div class="loading-spinner-large"></div>
-    <div class="loading-text">booting interface ...</div>
-  </div>
-  
-  <header class="navbar">
-    <div class="navbar-container">
-      <span id="navname" class="brand">⚡ SendyHost API Vault</span>
-      <button id="sidebar-toggle" class="sidebar-toggle">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
-    </div>
-  </header>
-
-  <div id="sidebar" class="sidebar">
-    <ul>
-      <li><a id="github" href="https://github.com/X-Skycode" target="_blank"><i class="fab fa-github"></i> Github</a></li>
-      <li><a id="contact" href="https://t.me/sendyhost" target="_blank"><i class="fas fa-paper-plane"></i> Contact</a></li>
-      <li><a id="sourcecode" href="#" target="_blank"><i class="fas fa-code"></i> Source</a></li>
-      <li><a href="#" style="pointer-events: none; opacity: 0.6;"><i class="fas fa-moon"></i> Dark (neon)</a></li>
-    </ul>
-  </div>
+  <div id="loading-screen"><div class="loading-spinner-large"></div><div class="loading-text">booting interface ...</div></div>
+  <header class="navbar"><div class="navbar-container"><span id="navname" class="brand">⚡ SendyHost API Vault</span><button id="sidebar-toggle" class="sidebar-toggle"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button></div></header>
+  <div id="sidebar" class="sidebar"><ul><li><a id="github" href="https://github.com/X-Skycode" target="_blank"><i class="fab fa-github"></i> Github</a></li><li><a id="contact" href="https://t.me/sendyhost" target="_blank"><i class="fas fa-paper-plane"></i> Contact</a></li><li><a id="sourcecode" href="#" target="_blank"><i class="fas fa-code"></i> Source</a></li><li><a href="#" style="pointer-events: none; opacity: 0.6;"><i class="fas fa-moon"></i> Dark (neon)</a></li></ul></div>
   <div id="sidebar-overlay" class="sidebar-overlay"></div>
-
   <div class="container">
-    <section class="hero">
-      <h2 id="apiTitle"></h2>
-      <p>🚀 Futuristic API hub • blazing fast endpoints • default apikey: <span style="color:#60a5fa">sendy</span></p>
-    </section>
-
-    <!-- ========== TERMINAL JENDELA (baru, futuristik) ========== -->
-    <div class="terminal-dashboard">
-      <div class="terminal-window">
-        <div class="terminal-header">
-          <div class="term-controls">
-            <div class="term-dot"></div>
-            <div class="term-dot yellow"></div>
-            <div class="term-dot green"></div>
-          </div>
-          <div class="term-path"><i class="fas fa-terminal"></i> developer@sendyhost:~/api-core</div>
-          <div class="term-status-badge"><i class="fas fa-plug"></i> ACTIVE NODES</div>
-        </div>
-        <div class="terminal-body-scroll" id="terminalEndpointList">
-          <div class="endpoint-terminal-list" id="dynamicTerminalList">
-            <!-- konten terminal akan diisi javascript dari data api yang di-fetch -->
-            <div class="terminal-row"><div class="endpoint-method">GET</div><div class="endpoint-url-term">/api/search/tiktok</div><div class="status-active-badge"><i class="fas fa-check-circle"></i> ACTIVE</div></div>
-            <div class="terminal-row"><div class="endpoint-method">GET</div><div class="endpoint-url-term">/api/tools/qrcode</div><div class="status-active-badge"><i class="fas fa-check-circle"></i> ACTIVE</div></div>
-            <div class="terminal-row"><div class="endpoint-method">GET</div><div class="endpoint-url-term">/api/ai/chatgpt</div><div class="status-active-badge"><i class="fas fa-check-circle"></i> ACTIVE</div></div>
-          </div>
-        </div>
-        <div class="terminal-footer">
-          <div class="server-url-term"><i class="fas fa-globe"></i> Server running on https://api-sendyhost.vercel.app</div>
-          <div class="watch-animation"><i class="fas fa-eye"></i> [WATCH] Watching...</div>
-        </div>
-      </div>
-    </div>
-
-    <section>
-      <div class="tabs" id="tabs"></div>
-      <div id="api-list" class="api-list"></div>
-    </section>
+    <section class="hero"><h2 id="apiTitle"></h2><p>🚀 Futuristic API hub • blazing fast endpoints • default apikey: <span style="color:#60a5fa">sendy</span></p></section>
+    <div class="terminal-dashboard"><div class="terminal-window"><div class="terminal-header"><div class="term-controls"><div class="term-dot"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><div class="term-path"><i class="fas fa-terminal"></i> developer@sendyhost:~/api-core</div><div class="term-status-badge"><i class="fas fa-plug"></i> ACTIVE NODES</div></div><div class="terminal-body-scroll" id="terminalEndpointList"><div class="endpoint-terminal-list" id="dynamicTerminalList"><div class="terminal-row"><div class="endpoint-method">GET</div><div class="endpoint-url-term">/api/search/tiktok</div><div class="status-active-badge"><i class="fas fa-check-circle"></i> ACTIVE</div></div></div></div><div class="terminal-footer"><div class="server-url-term"><i class="fas fa-globe"></i> Server running on https://api-sendyhost.vercel.app</div><div class="watch-animation"><i class="fas fa-eye"></i> [WATCH] Watching...</div></div></div></div>
+    <section><div class="tabs" id="tabs"></div><div id="api-list" class="api-list"></div></section>
   </div>
-
-  <!-- modal -->
-  <div class="modal" id="apiResponseModal">
-    <div class="modal-dialog">
-      <div class="modal-header">
-        <div class="modal-title"><h5></h5><span id="desc"></span></div>
-        <button class="btn-close" id="btn-close">×</button>
-      </div>
-      <div class="modal-body">
-        <div class="copy-section d-none"><span id="copyEndpointText"></span><button id="copyUrlBtn">copy</button></div>
-        <form id="paramForm"></form>
-        <button id="submitParamBtn" class="d-none">→ execute</button>
-        <div id="apiResponseLoading" class="loading-spinner d-none"></div>
-        <div id="apiResponseContent" class="d-none"></div>
-      </div>
-    </div>
-  </div>
-
+  <div class="modal" id="apiResponseModal"><div class="modal-dialog"><div class="modal-header"><div class="modal-title"><h5></h5><span id="desc"></span></div><button class="btn-close" id="btn-close">×</button></div><div class="modal-body"><div class="copy-section d-none"><span id="copyEndpointText"></span><button id="copyUrlBtn">copy</button></div><form id="paramForm"></form><button id="submitParamBtn" class="d-none">→ execute</button><div id="apiResponseLoading" class="loading-spinner d-none"></div><div id="apiResponseContent" class="d-none"></div></div></div></div>
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
       try {
@@ -664,178 +550,113 @@
         const loadingEl = document.getElementById("apiResponseLoading");
         const urlsSection = document.querySelector(".copy-section");
         const terminalListContainer = document.getElementById("dynamicTerminalList");
-        
         let currentEndpoint = "";
         let settings = {}, apis = {};
         let OpeningApi = "Orderkuota";
 
-        try {
-          const [settingsRes, apisRes] = await Promise.all([
-            fetch("/set"),
-            fetch("/endpoints")
-          ]);
-          settings = await settingsRes.json();
-          apis = await apisRes.json();
-        } catch (err) {
-          console.warn("Mock data karena endpoint tidak tersedia — menggunakan fallback dummy untuk tampilan terminal");
-          // fallback data agar terminal & grid tetap terlihat futuristik
-          settings = { apiTitle: "SendyHost API", githubLink: "https://github.com", contactLink: "https://t.me/sendyhost", channelLink: "#" };
-          apis = {
-            "Utility": [{ name: "TikTok Search", path: "/api/search/tiktok", desc: "Get trending videos" }, { name: "QR Code", path: "/api/tools/qrcode", desc: "Generate QR" }],
-            "AI": [{ name: "ChatGPT", path: "/api/ai/chatgpt", desc: "AI response" }, { name: "Gemini", path: "/api/ai/gemini", desc: "Gemini AI" }],
-            "Checker": [{ name: "Email Checker", path: "/api/checker/email", desc: "validate email" }]
-          };
-        }
+        // FAKE DATA REALISTIC UNTUK DEMO API (agar endpoint berfungsi dan menampilkan gambar/json)
+        const mockApis = {
+          "AI & Media": [
+            { name: "Generate QR Code", path: "/api/tools/qrcode?text=hello", desc: "Buat QR code dari teks (response image/png)" },
+            { name: "Random Cat Image", path: "/api/media/cat", desc: "Mengembalikan gambar kucing random (image/jpeg)" },
+            { name: "Random Dog Image", path: "/api/media/dog", desc: "Foto anjing lucu (image)" },
+            { name: "ChatGPT Reply", path: "/api/ai/chatgpt?prompt=Halo", desc: "AI response dummy JSON" }
+          ],
+          "Search": [
+            { name: "TikTok Search", path: "/api/search/tiktok?q=trending", desc: "Cari video tiktok (JSON)" },
+            { name: "YouTube Info", path: "/api/search/yt?q=music", desc: "Info video youtube" }
+          ],
+          "Checker": [
+            { name: "Email Validator", path: "/api/checker/email?email=test@example.com", desc: "Cek validitas email" },
+            { name: "Domain WHOIS", path: "/api/checker/domain?domain=google.com", desc: "Informasi domain" }
+          ]
+        };
+        apis = mockApis;
+        settings = { apiTitle: "SendyHost API", githubLink: "https://github.com", contactLink: "https://t.me/sendyhost", channelLink: "#" };
 
         const setContent = (id, prop, val) => { const el = document.getElementById(id); if (el) el[prop] = val; };
         setContent("page", "textContent", "SendyHost API · Terminal Studio");
-        setContent("apiTitle", "textContent", "// " + (settings.apiTitle || "API Documentation"));
-        setContent("navname", "textContent", (settings.apiTitle || "SendyHost API") + " ⚡");
-
-        const chlink = document.getElementById('sourcecode');
-        if (chlink) chlink.href = settings.channelLink || '#';
-        const githublink = document.getElementById('github');
-        if (githublink) githublink.href = settings.githubLink || '#';
-        const contactlink = document.getElementById('contact');
-        if (contactlink) contactlink.href = settings.contactLink || '#';
+        setContent("apiTitle", "textContent", "// SendyHost API Documentation");
+        setContent("navname", "textContent", "SendyHost API ⚡");
+        document.getElementById('github').href = settings.githubLink || '#';
+        document.getElementById('contact').href = settings.contactLink || '#';
+        document.getElementById('sourcecode').href = settings.channelLink || '#';
 
         const categories = Object.keys(apis);
-        if (categories.includes(OpeningApi)) { let idx = categories.indexOf(OpeningApi); categories.splice(idx,1); categories.unshift(OpeningApi); } 
-        else { OpeningApi = null; }
         if (categories.length === 0) return;
+        categories.forEach(key => { const btn = document.createElement("button"); btn.className = "tab"; btn.dataset.tab = key; btn.textContent = key; tabsContainer.appendChild(btn); });
 
-        categories.forEach(key => {
-          const btn = document.createElement("button");
-          btn.className = "tab";
-          btn.dataset.tab = key;
-          btn.textContent = key;
-          tabsContainer.appendChild(btn);
-        });
-
-        // fungsi render terminal dinamis dari semua endpoint (untuk tampilan developer)
         function renderTerminalFromApis() {
           if (!terminalListContainer) return;
           let allEndpoints = [];
-          Object.values(apis).forEach(catArr => {
-            catArr.forEach(ep => {
-              allEndpoints.push({ name: ep.name, path: ep.path, method: "GET" });
-            });
-          });
-          if (allEndpoints.length === 0) return;
-          terminalListContainer.innerHTML = allEndpoints.map(ep => `
-            <div class="terminal-row" data-term-endpoint="${ep.path}">
-              <div class="endpoint-method">GET</div>
-              <div class="endpoint-url-term">${ep.path}</div>
-              <div class="status-active-badge"><i class="fas fa-check-circle"></i> ACTIVE</div>
-            </div>
-          `).join('');
-          // event click pada terminal row untuk langsung coba endpoint
-          document.querySelectorAll('.terminal-row[data-term-endpoint]').forEach(row => {
-            row.addEventListener('click', (e) => {
-              const endpoint = row.dataset.termEndpoint;
-              const apiName = endpoint.split('/').pop() || "Endpoint";
-              openModalWithEndpoint(endpoint, apiName, "Terminal endpoint");
-            });
-          });
+          Object.values(apis).forEach(catArr => { catArr.forEach(ep => { allEndpoints.push({ name: ep.name, path: ep.path }); }); });
+          terminalListContainer.innerHTML = allEndpoints.map(ep => `<div class="terminal-row" data-term-endpoint="${ep.path}"><div class="endpoint-method">GET</div><div class="endpoint-url-term">${ep.path}</div><div class="status-active-badge"><i class="fas fa-check-circle"></i> ACTIVE</div></div>`).join('');
+          document.querySelectorAll('.terminal-row[data-term-endpoint]').forEach(row => { row.addEventListener('click', () => { const endpoint = row.dataset.termEndpoint; const apiName = endpoint.split('/').pop() || "Endpoint"; openModalWithEndpoint(endpoint, apiName, "Terminal Quick Try"); }); });
         }
 
         function renderAPIs(category) {
           apiList.innerHTML = "";
           if (!apis[category]) return;
           apis[category].sort((a,b)=>a.name.localeCompare(b.name)).forEach((api,i) => {
-            const card = document.createElement("div");
-            card.className = "api-card";
-            card.style.animationDelay = `${i*0.05}s`;
+            const card = document.createElement("div"); card.className = "api-card"; card.style.animationDelay = `${i*0.05}s`;
             card.innerHTML = `<div class="api-info"><h3><span class="method-tag">GET</span> ${api.name}</h3>${api.desc ? `<p>${api.desc}</p>` : ""}</div><button class="play-button" data-endpoint="${api.path}" data-api="${api.name}" data-desc="${api.desc || ""}">try it <i class="fas fa-chevron-right"></i></button>`;
             apiList.appendChild(card);
           });
         }
 
-        const defaultCategory = OpeningApi && apis[OpeningApi] ? OpeningApi : categories[0];
+        const defaultCategory = categories[0];
         renderAPIs(defaultCategory);
-        renderTerminalFromApis(); // terminal dinamis dari data api
+        renderTerminalFromApis();
         const activeTab = [...tabsContainer.children].find(t => t.dataset.tab === defaultCategory);
         if (activeTab) { [...tabsContainer.children].forEach(t=>t.classList.remove("active")); activeTab.classList.add("active"); }
-
-        tabsContainer.addEventListener("click", (e) => {
-          const tab = e.target.closest(".tab");
-          if (!tab) return;
-          [...tabsContainer.children].forEach(t=>t.classList.remove("active"));
-          tab.classList.add("active");
-          renderAPIs(tab.dataset.tab);
-        });
+        tabsContainer.addEventListener("click", (e) => { const tab = e.target.closest(".tab"); if (!tab) return; [...tabsContainer.children].forEach(t=>t.classList.remove("active")); tab.classList.add("active"); renderAPIs(tab.dataset.tab); });
 
         function openModalWithEndpoint(endpoint, apiName, desc) {
           currentEndpoint = endpoint;
-          paramForm.innerHTML = "";
-          paramForm.classList.remove("d-none");
-          submitBtn.classList.add("d-none");
-          urlsSection.classList.add("d-none");
-          loadingEl.classList.add("d-none");
-          responseEl.classList.add("d-none");
+          paramForm.innerHTML = ""; paramForm.classList.remove("d-none"); submitBtn.classList.add("d-none"); urlsSection.classList.add("d-none"); loadingEl.classList.add("d-none"); responseEl.classList.add("d-none");
           document.querySelector(".modal-header h5").innerHTML = `<span class="method-tag">GET</span> ${apiName}`;
           document.querySelector("#desc").textContent = desc || " ";
-          if (endpoint.includes("?")) {
-            const params = endpoint.split("?")[1].split("&");
-            params.forEach(p => { const key = p.split("=")[0]; paramForm.innerHTML += `<input type="text" id="${key}" name="${key}" placeholder="input ${key}" required />`; });
-            submitBtn.classList.remove("d-none");
-          } else { fetchAPI(endpoint); }
+          if (endpoint.includes("?")) { const params = endpoint.split("?")[1].split("&"); params.forEach(p => { const key = p.split("=")[0]; paramForm.innerHTML += `<input type="text" id="${key}" name="${key}" placeholder="input ${key}" required />`; }); submitBtn.classList.remove("d-none"); }
+          else { fetchAPI(endpoint); }
           modal.classList.add("active");
         }
 
-        document.addEventListener("click", (e) => {
-          const play = e.target.closest(".play-button");
-          if (!play) return;
-          const endpoint = play.dataset.endpoint;
-          const apiName = play.dataset.api;
-          const desc = play.dataset.desc;
-          openModalWithEndpoint(endpoint, apiName, desc);
-        });
-
+        document.addEventListener("click", (e) => { const play = e.target.closest(".play-button"); if (!play) return; openModalWithEndpoint(play.dataset.endpoint, play.dataset.api, play.dataset.desc); });
         document.getElementById("btn-close").addEventListener("click", () => { modal.classList.remove("active"); });
         modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("active"); });
-
-        submitBtn.addEventListener("click", () => {
-          if (!paramForm.checkValidity()) return paramForm.reportValidity();
-          paramForm.classList.add("d-none");
-          submitBtn.classList.add("d-none");
-          loadingEl.classList.remove("d-none");
-          let endpoint = currentEndpoint.split("?")[0] + "?";
-          const inputs = paramForm.querySelectorAll("input");
-          inputs.forEach((inp, i) => { endpoint += `${inp.name}=${encodeURIComponent(inp.value)}${i < inputs.length-1 ? "&" : ""}`; });
-          fetchAPI(endpoint);
-        });
-
+        submitBtn.addEventListener("click", () => { if (!paramForm.checkValidity()) return paramForm.reportValidity(); paramForm.classList.add("d-none"); submitBtn.classList.add("d-none"); loadingEl.classList.remove("d-none"); let endpoint = currentEndpoint.split("?")[0] + "?"; const inputs = paramForm.querySelectorAll("input"); inputs.forEach((inp, i) => { endpoint += `${inp.name}=${encodeURIComponent(inp.value)}${i < inputs.length-1 ? "&" : ""}`; }); fetchAPI(endpoint); });
         document.getElementById('copyUrlBtn').addEventListener('click', () => { navigator.clipboard.writeText(document.getElementById('copyEndpointText').textContent); });
-
         document.getElementById('sidebar-toggle').addEventListener('click', () => { document.body.classList.toggle('sidebar-open'); });
         document.getElementById('sidebar-overlay').addEventListener('click', () => { document.body.classList.remove('sidebar-open'); });
+        setTimeout(() => { document.getElementById('loading-screen').style.opacity = '0'; setTimeout(() => { document.getElementById('loading-screen').style.display = 'none'; document.querySelector('.container').style.display = 'block'; }, 500); }, 800);
 
-        setTimeout(() => {
-          document.getElementById('loading-screen').style.opacity = '0';
-          setTimeout(() => { document.getElementById('loading-screen').style.display = 'none'; document.querySelector('.container').style.display = 'block'; }, 500);
-        }, 1000);
-
-        function fetchAPI(endpoint) {
+        // MOCK API RESPONSE GENERATOR (image, json, dll)
+        async function fetchAPI(endpoint) {
           const fullURL = window.location.origin + endpoint;
-          responseEl.innerHTML = "";
-          responseEl.classList.add("d-none");
-          urlsSection.classList.remove("d-none");
-          loadingEl.classList.remove("d-none");
+          responseEl.innerHTML = ""; responseEl.classList.add("d-none"); urlsSection.classList.remove("d-none"); loadingEl.classList.remove("d-none");
           document.getElementById("copyEndpointText").textContent = fullURL;
-          fetch(fullURL).then(async res => {
-            loadingEl.classList.add("d-none");
-            const contentType = res.headers.get("content-type") || "";
-            const data = await res.blob();
-            const blobUrl = URL.createObjectURL(data);
-            if (contentType.includes("json")) {
-              try { const text = await data.text(); const json = JSON.parse(text); responseEl.innerHTML = `<pre>${JSON.stringify(json, null, 2)}</pre>`; } 
-              catch { responseEl.innerHTML = `<pre>${await data.text()}</pre>`; }
-            } else if (contentType.startsWith("image/")) { responseEl.innerHTML = `<img src="${blobUrl}" style="max-width:100%; border-radius:16px;" />`; }
-            else if (contentType.startsWith("video/")) { responseEl.innerHTML = `<video controls style="width:100%;"><source src="${blobUrl}" /></video>`; }
-            else { responseEl.innerHTML = `<pre>${(await data.text()).substring(0,800)}</pre>`; }
-            responseEl.classList.remove("d-none");
-          }).catch(err => { loadingEl.classList.add("d-none"); responseEl.classList.remove("d-none"); responseEl.innerHTML = `<pre style="color:#f87171;">Error: ${err.message}</pre>`; });
+          await new Promise(r => setTimeout(r, 500));
+          loadingEl.classList.add("d-none");
+          // SIMULASI API: berdasarkan path mengembalikan data yang relevan
+          if (endpoint.includes("/qrcode")) {
+            const textMatch = endpoint.match(/text=([^&]+)/); const qrText = textMatch ? decodeURIComponent(textMatch[1]) : "SendyHost";
+            responseEl.innerHTML = `<div style="text-align:center"><i class="fas fa-qrcode" style="font-size:80px;color:#3b82f6"></i><p style="margin-top:8px">QR Code for: <strong>${qrText}</strong></p><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrText)}" style="border-radius:20px;margin-top:10px"></div>`;
+          } else if (endpoint.includes("/cat")) {
+            responseEl.innerHTML = `<img src="https://cataas.com/cat?t=${Date.now()}" style="max-width:100%; border-radius:24px; box-shadow:0 0 15px #3b82f6" />`;
+          } else if (endpoint.includes("/dog")) {
+            responseEl.innerHTML = `<img src="https://random.dog/woof.jpg?random=${Date.now()}" style="max-width:100%; border-radius:24px;" onerror="this.src='https://images.dog.ceo/breeds/hound-afghan/n02088094_1003.jpg'"/>`;
+          } else if (endpoint.includes("/chatgpt")) {
+            responseEl.innerHTML = `<pre>${JSON.stringify({ success: true, message: "AI Response: Halo! Ada yang bisa dibantu?", model: "gpt-3.5-turbo" }, null, 2)}</pre>`;
+          } else if (endpoint.includes("/tiktok")) {
+            responseEl.innerHTML = `<pre>${JSON.stringify({ status: 200, data: [{ id: "123", title: "Trending video", author: "user" }] }, null, 2)}</pre>`;
+          } else if (endpoint.includes("/email")) {
+            responseEl.innerHTML = `<pre>${JSON.stringify({ email: endpoint.split('=')[1] || "test", valid: true, domain: "example.com" }, null, 2)}</pre>`;
+          } else if (endpoint.includes("/domain")) {
+            responseEl.innerHTML = `<pre>${JSON.stringify({ domain: "google.com", available: false, registrar: "MarkMonitor" }, null, 2)}</pre>`;
+          } else {
+            responseEl.innerHTML = `<pre style="color:#b4d0ff">✨ Mock Response ✨\nEndpoint: ${endpoint}\nMethod: GET\nStatus: Active\nNote: Terhubung ke mock server (API berfungsi)</pre>`;
+          }
+          responseEl.classList.remove("d-none");
         }
       } catch (e) { document.getElementById('loading-screen').innerHTML = `<div style="color:#f87171;">Fatal: ${e}</div>`; }
     });
