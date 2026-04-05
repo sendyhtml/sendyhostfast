@@ -3,12 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SendyHost API's · Terminal Studio</title>
+  <title id="page">Docs SendyHost API's</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:opsz,wght@14..32,300;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <!-- Inter & JetBrains Mono -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  
   <style>
+    /* RESET & GLOBAL — dark mode permanen dengan aksen modern */
     * {
       margin: 0;
       padding: 0;
@@ -16,34 +19,35 @@
     }
 
     ::-webkit-scrollbar {
-      width: 4px;
-      height: 4px;
+      width: 5px;
+      height: 5px;
       background: #0a0f1e;
     }
     ::-webkit-scrollbar-thumb {
-      background: #1e3a8a;
-      border-radius: 8px;
-      box-shadow: 0 0 8px #3b82f6;
+      background: #2d4a8c;
+      border-radius: 10px;
+      box-shadow: 0 0 6px #3b82f6;
     }
 
     body {
       font-family: 'Inter', 'JetBrains Mono', monospace;
-      background: #0a0c14;
-      color: #e1e9f0;
+      background: #05070f;
+      color: #eef2ff;
       line-height: 1.5;
       min-height: 100vh;
       position: relative;
       overflow-x: hidden;
     }
 
+    /* Background refined: soft grid + radial glow */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
       background-image: 
-        linear-gradient(rgba(0, 100, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 100, 255, 0.03) 1px, transparent 1px);
-      background-size: 50px 50px;
+        linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
       pointer-events: none;
       z-index: -1;
     }
@@ -51,62 +55,137 @@
     body::after {
       content: '';
       position: fixed;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at center, #0f2b5c30 0%, #0a0c14 80%);
-      animation: glowPulse 8s infinite alternate;
+      top: -30%;
+      left: -20%;
+      width: 140%;
+      height: 140%;
+      background: radial-gradient(circle at 30% 40%, #0f2b5c30 0%, #05070f 80%);
+      pointer-events: none;
       z-index: -2;
     }
 
-    @keyframes glowPulse {
-      0% { opacity: 0.5; transform: scale(1); }
-      100% { opacity: 1; transform: scale(1.15); }
+    /* ========= TERMINAL BLOCK MODERN ========= */
+    .terminal-header {
+      background: rgba(8, 12, 25, 0.9);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid #2d4a8c;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      position: sticky;
+      top: 0;
+      z-index: 90;
     }
 
-    #loading-screen {
-      position: fixed;
-      inset: 0;
-      background: #0a0c14;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      transition: opacity 0.5s;
-    }
-
-    .loading-spinner-large {
-      width: 48px;
-      height: 48px;
-      border: 3px solid #1e3a8a;
-      border-top-color: #60a5fa;
-      border-radius: 50%;
-      animation: spin 0.9s linear infinite;
-      box-shadow: 0 0 20px #3b82f6;
-    }
-
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    .loading-text {
-      color: #94a3b8;
-      margin-top: 1.2rem;
-      font-weight: 400;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      font-size: 0.85rem;
-    }
-
-    .navbar {
-      background: rgba(8, 12, 25, 0.85);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid #1e3a8a80;
+    .terminal-container {
+      max-width: 1400px;
+      margin: 0 auto;
       padding: 1rem 2rem;
+    }
+
+    .terminal-badge {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.75rem;
+    }
+
+    .node-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #0f172a;
+      padding: 0.25rem 1rem;
+      border-radius: 40px;
+      border-left: 3px solid #3b82f6;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: -0.2px;
+      color: #94a3f8;
+    }
+
+    .node-badge i {
+      color: #3b82f6;
+      font-size: 1rem;
+    }
+
+    .terminal-line {
+      background: #010409;
+      border-radius: 20px;
+      border: 1px solid #1e2c4a;
+      padding: 0.6rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      box-shadow: 0 0 12px rgba(59,130,246,0.2);
+      transition: all 0.2s;
+    }
+
+    .terminal-prompt {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: #7aa2f7;
+      background: #0f172a;
+      padding: 0.2rem 0.8rem;
+      border-radius: 24px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .terminal-prompt i {
+      font-size: 0.8rem;
+    }
+
+    .endpoint-scroll {
+      flex: 1;
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 0.25rem 0;
+      scrollbar-width: thin;
+    }
+
+    .endpoint-chip {
+      background: #0f172f;
+      border: 1px solid #2d4a8c;
+      border-radius: 32px;
+      padding: 0.35rem 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #b9d0ff;
+      white-space: nowrap;
+      transition: 0.2s;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+    }
+
+    .endpoint-chip:hover {
+      background: #1e3a8a;
+      border-color: #60a5fa;
+      color: white;
+      box-shadow: 0 0 10px #3b82f6;
+      transform: translateY(-1px);
+    }
+
+    .endpoint-chip i {
+      margin-right: 6px;
+      font-size: 0.7rem;
+      color: #3b82f6;
+    }
+
+    /* navbar baru lebih sleek */
+    .navbar {
+      background: rgba(5, 7, 15, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #1e3a8a40;
+      padding: 0.75rem 2rem;
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 4px 30px rgba(0, 50, 150, 0.25);
+      margin-top: 0;
     }
 
     .navbar-container {
@@ -118,16 +197,16 @@
     }
 
     .brand {
-      font-size: 1.6rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, #a5d8ff, #3b82f6, #2563eb);
+      font-size: 1.4rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #c7e2ff, #3b82f6);
       -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       background-clip: text;
-      color: transparent;
-      letter-spacing: -0.5px;
-      text-shadow: 0 0 8px #3b82f660;
+      letter-spacing: -0.3px;
     }
 
+    /* sidebar toggle (tetap) */
     .sidebar-toggle {
       width: 30px;
       height: 24px;
@@ -146,27 +225,28 @@
       background: #60a5fa;
       border-radius: 4px;
       transition: all 0.3s ease;
-      box-shadow: 0 0 8px #3b82f6;
+      box-shadow: 0 0 6px #3b82f6;
     }
 
     body.sidebar-open .sidebar-toggle .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); background: #f0f9ff; }
     body.sidebar-open .sidebar-toggle .bar:nth-child(2) { opacity: 0; }
     body.sidebar-open .sidebar-toggle .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); background: #f0f9ff; }
 
+    /* sidebar (unchanged functional) */
     .sidebar {
       position: fixed;
       top: 0;
       right: 0;
       width: 280px;
       height: 100%;
-      background: rgba(6, 10, 22, 0.98);
+      background: rgba(8, 12, 25, 0.96);
       backdrop-filter: blur(20px);
-      border-left: 1px solid #2563eb60;
+      border-left: 1px solid #2563eb40;
       transform: translateX(100%);
       transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
       z-index: 200;
       padding: 6rem 2rem 2rem;
-      box-shadow: -10px 0 40px rgba(0, 80, 255, 0.3);
+      box-shadow: -10px 0 40px rgba(0, 80, 255, 0.25);
     }
 
     body.sidebar-open .sidebar { transform: translateX(0); }
@@ -174,8 +254,8 @@
     .sidebar-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(4px);
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(3px);
       z-index: 150;
       opacity: 0;
       visibility: hidden;
@@ -184,7 +264,7 @@
     body.sidebar-open .sidebar-overlay { opacity: 1; visibility: visible; }
 
     .sidebar ul { list-style: none; }
-    .sidebar ul li { margin-bottom: 1.8rem; }
+    .sidebar ul li { margin-bottom: 1.5rem; }
     .sidebar ul li a {
       color: #b0c7ed;
       text-decoration: none;
@@ -192,7 +272,7 @@
       display: flex;
       align-items: center;
       gap: 1rem;
-      padding: 0.7rem 1rem;
+      padding: 0.6rem 1rem;
       border-radius: 12px;
       border: 1px solid transparent;
       transition: 0.2s;
@@ -205,155 +285,49 @@
       color: white;
     }
 
+    /* container utama */
     .container {
-      max-width: 1400px;
+      max-width: 1300px;
       margin: 2rem auto;
       padding: 0 2rem;
     }
 
+    /* hero */
     .hero {
       margin-bottom: 2.5rem;
       border-left: 4px solid #3b82f6;
-      padding-left: 2rem;
+      padding-left: 1.8rem;
     }
     .hero h2 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      background: linear-gradient(to right, #fff, #90caf9, #3b82f6);
+      font-size: 2.3rem;
+      font-weight: 600;
+      background: linear-gradient(to right, #fff, #90caf9);
       -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.02em;
     }
     .hero p {
-      color: #7e9bc0;
-      margin-top: 0.5rem;
+      color: #8aa3c7;
+      margin-top: 0.4rem;
       font-size: 0.95rem;
     }
 
-    .terminal-dashboard {
-      margin-bottom: 3rem;
-      position: relative;
-      z-index: 5;
-    }
-    .terminal-window {
-      background: #050a17dd;
-      backdrop-filter: blur(12px);
-      border-radius: 28px;
-      border: 1px solid #2b6eff80;
-      box-shadow: 0 25px 40px -12px black, 0 0 0 1px rgba(0, 170, 255, 0.2), 0 0 25px rgba(0, 100, 255, 0.3);
-      overflow: hidden;
-    }
-    .terminal-header {
-      background: #030717cc;
-      padding: 0.8rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-      border-bottom: 1px solid #2b6eff70;
-    }
-    .term-controls { display: flex; gap: 10px; }
-    .term-dot { width: 13px; height: 13px; border-radius: 50%; background: #ff5f56; }
-    .term-dot.yellow { background: #ffbd2e; }
-    .term-dot.green { background: #27c93f; }
-    .term-path {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      background: #0f1a2f;
-      padding: 0.3rem 1rem;
-      border-radius: 40px;
-      color: #7eafff;
-    }
-    .term-status-badge {
-      font-size: 0.7rem;
-      background: #0b2a1f;
-      padding: 0.2rem 1rem;
-      border-radius: 60px;
-      color: #2effb0;
-    }
-    .terminal-body-scroll {
-      max-height: 320px;
-      overflow-y: auto;
-      padding: 1.2rem 1.5rem;
-    }
-    .endpoint-terminal-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-    }
-    .terminal-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #0b1124aa;
-      border-radius: 18px;
-      padding: 0.7rem 1rem;
-      font-family: 'JetBrains Mono', monospace;
-      border-left: 2px solid #2b6eff;
-      transition: 0.15s;
-      cursor: pointer;
-    }
-    .terminal-row:hover {
-      background: #121b34;
-      transform: translateX(4px);
-      border-left-color: #0af;
-    }
-    .endpoint-method {
-      background: #0e2a4a;
-      padding: 0.2rem 0.8rem;
-      border-radius: 40px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: #b3d4ff;
-    }
-    .endpoint-url-term {
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: #cfe2ff;
-      flex: 1;
-      margin-left: 1rem;
-    }
-    .status-active-badge {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: #0f2e1d;
-      padding: 0.2rem 0.8rem;
-      border-radius: 40px;
-      font-size: 0.7rem;
-      color: #5effb2;
-    }
-    .terminal-footer {
-      background: #01041580;
-      border-top: 1px solid #1e3a8a;
-      padding: 0.8rem 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.7rem;
-    }
-    .server-url-term { color: #6b9eff; }
-    .watch-animation { animation: blinkText 1.5s infinite; color: #5effa3; }
-    @keyframes blinkText {
-      0% { opacity: 0.6; text-shadow: 0 0 0 #0f0; }
-      100% { opacity: 1; text-shadow: 0 0 4px #2effaa; }
-    }
-
+    /* tabs modern */
     .tabs {
       display: flex;
       gap: 0.5rem;
       flex-wrap: wrap;
       margin-bottom: 2rem;
       border-bottom: 1px solid #1e3a8a60;
-      padding-bottom: 0.8rem;
+      padding-bottom: 0.6rem;
     }
     .tab {
       background: transparent;
       border: none;
-      color: #6b8cae;
-      font-family: 'JetBrains Mono', monospace;
+      color: #8ba3cc;
+      font-family: 'Inter', monospace;
       font-weight: 500;
-      padding: 0.6rem 1.5rem;
+      padding: 0.5rem 1.6rem;
       cursor: pointer;
       font-size: 0.9rem;
       border-radius: 40px;
@@ -362,37 +336,38 @@
     .tab.active {
       background: #11223b;
       color: white;
-      box-shadow: 0 0 15px #2563eb, inset 0 0 5px #3b82f6;
+      box-shadow: 0 0 12px #2563eb, inset 0 0 4px #3b82f6;
     }
     .tab:hover { color: white; background: #1b2b44; }
 
+    /* API grid */
     .api-list {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.2rem;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 1.3rem;
       margin-bottom: 4rem;
     }
+
     .api-card {
-      background: rgba(15, 22, 36, 0.7);
+      background: rgba(12, 18, 30, 0.7);
       backdrop-filter: blur(8px);
       border: 1px solid #1e3a8a60;
-      border-radius: 24px;
-      padding: 1.5rem 1.2rem;
-      transition: 0.2s;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+      border-radius: 28px;
+      padding: 1.5rem;
+      transition: all 0.25s ease;
       opacity: 0;
       transform: translateY(10px);
       animation: cardGlowIn 0.5s forwards;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
     }
     @keyframes cardGlowIn { to { opacity: 1; transform: translateY(0); } }
+
     .api-card:hover {
       border-color: #3b82f6;
-      box-shadow: 0 0 25px #2563eb;
+      box-shadow: 0 0 28px #2563eb, 0 12px 28px -8px #0f2b5c;
       transform: translateY(-4px);
     }
+
     .api-info h3 {
       display: flex;
       align-items: center;
@@ -400,32 +375,40 @@
       font-size: 1.2rem;
       font-weight: 500;
       margin-bottom: 0.4rem;
-      color: #d6e4ff;
+      color: #deeaff;
     }
     .method-tag {
       background: #1e3a8a;
-      color: #a5d8ff;
+      color: #bbd7ff;
       padding: 0.2rem 0.8rem;
       border-radius: 20px;
       font-size: 0.7rem;
       font-weight: 600;
+      letter-spacing: 0.5px;
       border: 1px solid #3b82f6;
-      box-shadow: 0 0 8px #3b82f6;
+      box-shadow: 0 0 6px #3b82f6;
     }
+    .api-info p {
+      color: #95adde;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      margin-top: 0.5rem;
+    }
+
     .play-button {
       background: transparent;
       border: 1px solid #3b82f6;
-      color: #a5d8ff;
-      padding: 0.6rem 1rem;
+      color: #bbd5ff;
+      padding: 0.5rem 1.2rem;
       border-radius: 40px;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Inter', monospace;
       font-weight: 500;
       font-size: 0.85rem;
       cursor: pointer;
       transition: 0.2s;
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.6rem;
       width: fit-content;
       margin-top: 1rem;
     }
@@ -436,10 +419,11 @@
       border-color: white;
     }
 
+    /* modal (tetap utuh) */
     .modal {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.75);
+      background: rgba(0, 0, 0, 0.8);
       backdrop-filter: blur(12px);
       display: flex;
       align-items: center;
@@ -450,33 +434,42 @@
       transition: 0.3s;
       padding: 1rem;
     }
-    .modal.active { opacity: 1; pointer-events: auto; }
+    .modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
     .modal-dialog {
-      background: #0d1326ee;
-      border: 1px solid #2563eb;
-      border-radius: 32px;
+      background: #0d1326;
+      border: 1px solid #2563eb80;
+      border-radius: 36px;
       padding: 2rem;
       width: 100%;
-      max-width: 550px;
-      box-shadow: 0 0 60px #2563eb;
-      transform: scale(0.95);
-      transition: 0.3s;
+      max-width: 580px;
+      box-shadow: 0 0 70px #2563eb, 0 20px 40px black;
+      transform: scale(0.96);
+      transition: 0.25s;
     }
     .modal.active .modal-dialog { transform: scale(1); }
+
     .modal-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 1.2rem;
     }
-    .modal-title h5 { font-size: 1.5rem; font-weight: 500; color: white; }
+    .modal-title h5 { font-size: 1.4rem; font-weight: 500; color: white; display: flex; gap: 8px; align-items: center; }
+    .modal-title span { color: #7e9bc0; font-size: 0.85rem; margin-left: 6px; }
     .btn-close {
       background: none;
       border: none;
-      color: #647da0;
-      font-size: 2.5rem;
+      color: #7b9ad0;
+      font-size: 2.2rem;
+      line-height: 1;
       cursor: pointer;
     }
+    .btn-close:hover { color: white; text-shadow: 0 0 12px #3b82f6; }
+
     .copy-section {
       background: #0f1a2f;
       border: 1px solid #1e3a8a;
@@ -486,57 +479,166 @@
       gap: 0.5rem;
       margin: 1rem 0;
     }
-    #copyEndpointText { flex: 1; font-family: monospace; font-size: 0.8rem; color: #b8d1ff; }
+    #copyEndpointText {
+      flex: 1;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: #b8d1ff;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
     #copyUrlBtn {
       background: #1e3a8a;
       border: none;
       color: white;
-      padding: 0.4rem 1rem;
+      padding: 0.3rem 1rem;
       border-radius: 30px;
+      font-weight: 500;
       cursor: pointer;
     }
+    #copyUrlBtn:hover { background: #2563eb; }
+
     #paramForm input {
       width: 100%;
       background: #101b30;
       border: 1px solid #1e3a8a;
       border-radius: 40px;
-      padding: 0.9rem;
+      padding: 0.8rem 1.2rem;
       margin-bottom: 1rem;
       color: white;
+      font-family: 'Inter', monospace;
     }
+    #paramForm input:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 18px #3b82f6;
+    }
+
     #submitParamBtn {
       background: #1e3a8a;
       border: none;
       color: white;
-      padding: 0.9rem;
+      padding: 0.8rem;
       width: 100%;
       border-radius: 40px;
       font-weight: 600;
       cursor: pointer;
-      box-shadow: 0 0 15px #2563eb;
+      transition: 0.2s;
     }
+    #submitParamBtn:hover { background: #2563eb; box-shadow: 0 0 20px #3b82f6; }
+
     #apiResponseContent {
       background: #0a1020;
       border-radius: 24px;
       padding: 1.5rem;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
+      border: 1px solid #1e3a8a;
       overflow: auto;
     }
+    #apiResponseContent pre {
+      color: #c9e0ff;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+    }
+    .loading-spinner {
+      width: 32px;
+      height: 32px;
+      border: 2px solid #1e3a8a;
+      border-top-color: #60a5fa;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 1rem auto;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
     .d-none { display: none !important; }
-    @media (max-width: 700px) { .container { padding: 0 1rem; } .terminal-header { flex-direction: column; align-items: flex-start; } }
+
+    @media (max-width: 700px) {
+      .container { padding: 0 1.2rem; }
+      .hero h2 { font-size: 1.8rem; }
+      .terminal-line { flex-direction: column; align-items: flex-start; }
+      .endpoint-scroll { width: 100%; }
+    }
   </style>
 </head>
 <body>
-  <div id="loading-screen"><div class="loading-spinner-large"></div><div class="loading-text">booting interface ...</div></div>
-  <header class="navbar"><div class="navbar-container"><span id="navname" class="brand">⚡ SendyHost API Vault</span><button id="sidebar-toggle" class="sidebar-toggle"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button></div></header>
-  <div id="sidebar" class="sidebar"><ul><li><a id="github" href="https://github.com/X-Skycode" target="_blank"><i class="fab fa-github"></i> Github</a></li><li><a id="contact" href="https://t.me/sendyhost" target="_blank"><i class="fas fa-paper-plane"></i> Contact</a></li><li><a id="sourcecode" href="#" target="_blank"><i class="fas fa-code"></i> Source</a></li><li><a href="#" style="pointer-events: none; opacity: 0.6;"><i class="fas fa-moon"></i> Dark (neon)</a></li></ul></div>
-  <div id="sidebar-overlay" class="sidebar-overlay"></div>
-  <div class="container">
-    <section class="hero"><h2 id="apiTitle"></h2><p>🚀 Futuristic API hub • blazing fast endpoints • default apikey: <span style="color:#60a5fa">sendy</span></p></section>
-    <div class="terminal-dashboard"><div class="terminal-window"><div class="terminal-header"><div class="term-controls"><div class="term-dot"></div><div class="term-dot yellow"></div><div class="term-dot green"></div></div><div class="term-path"><i class="fas fa-terminal"></i> developer@sendyhost:~/api-core</div><div class="term-status-badge"><i class="fas fa-plug"></i> ACTIVE NODES</div></div><div class="terminal-body-scroll" id="terminalEndpointList"><div class="endpoint-terminal-list" id="dynamicTerminalList"><div class="terminal-row"><div class="endpoint-method">GET</div><div class="endpoint-url-term">/api/search/tiktok</div><div class="status-active-badge"><i class="fas fa-check-circle"></i> ACTIVE</div></div></div></div><div class="terminal-footer"><div class="server-url-term"><i class="fas fa-globe"></i> Server running on https://api-sendyhost.vercel.app</div><div class="watch-animation"><i class="fas fa-eye"></i> [WATCH] Watching...</div></div></div></div>
-    <section><div class="tabs" id="tabs"></div><div id="api-list" class="api-list"></div></section>
+  <div id="loading-screen">
+    <div class="loading-spinner-large" style="width:48px;height:48px;border:3px solid #1e3a8a;border-top-color:#60a5fa;border-radius:50%;animation:spin 0.9s linear infinite;box-shadow:0 0 20px #3b82f6;"></div>
+    <div class="loading-text" style="color:#94a3b8; margin-top:1.2rem;">booting interface ...</div>
   </div>
-  <div class="modal" id="apiResponseModal"><div class="modal-dialog"><div class="modal-header"><div class="modal-title"><h5></h5><span id="desc"></span></div><button class="btn-close" id="btn-close">×</button></div><div class="modal-body"><div class="copy-section d-none"><span id="copyEndpointText"></span><button id="copyUrlBtn">copy</button></div><form id="paramForm"></form><button id="submitParamBtn" class="d-none">→ execute</button><div id="apiResponseLoading" class="loading-spinner d-none"></div><div id="apiResponseContent" class="d-none"></div></div></div></div>
+
+  <!-- MODERN TERMINAL BLOCK (Node.js style) -->
+  <div class="terminal-header">
+    <div class="terminal-container">
+      <div class="terminal-badge">
+        <div class="node-badge"><i class="fab fa-node-js"></i> NODE · API ENDPOINTS</div>
+        <div style="font-size:0.7rem; color:#5f7faf;"><i class="fas fa-database"></i> live endpoints from /endpoints</div>
+      </div>
+      <div class="terminal-line">
+        <div class="terminal-prompt"><i class="fas fa-terminal"></i> $> ls -la endpoints/</div>
+        <div class="endpoint-scroll" id="terminalEndpointList">
+          <!-- daftar endpoint akan diisi javascript dari data apis -->
+          <span class="endpoint-chip"><i class="fas fa-spinner fa-pulse"></i> loading endpoints...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header class="navbar">
+    <div class="navbar-container">
+      <span id="navname" class="brand">API Vault</span>
+      <button id="sidebar-toggle" class="sidebar-toggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <div id="sidebar" class="sidebar">
+    <ul>
+      <li><a id="github" href="https://github.com/X-Skycode" target="_blank"><i class="fab fa-github"></i> Github</a></li>
+      <li><a id="contact" href="https://t.me/sendyhost" target="_blank"><i class="fas fa-paper-plane"></i> Contact</a></li>
+      <li><a id="sourcecode" href="https://github.com/X-Skycode/selfbot" target="_blank"><i class="fas fa-code"></i> Source</a></li>
+      <li><a href="#" id="theme-toggle" style="pointer-events: none; opacity: 0.6;"><i class="fas fa-moon"></i> Dark (fixed)</a></li>
+    </ul>
+  </div>
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+  <div class="container">
+    <section class="hero">
+      <h2 id="apiTitle"></h2>
+      <p>⚡ modern API playground · default apikey: <span style="color:#60a5fa">sendy</span> · click endpoint chip to test</p>
+    </section>
+
+    <section>
+      <div class="tabs" id="tabs"></div>
+      <div id="api-list" class="api-list"></div>
+    </section>
+  </div>
+
+  <div class="modal" id="apiResponseModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title">
+          <h5></h5>
+          <span id="desc"></span>
+        </div>
+        <button class="btn-close" id="btn-close">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="copy-section d-none">
+          <span id="copyEndpointText"></span>
+          <button id="copyUrlBtn">copy</button>
+        </div>
+        <form id="paramForm"></form>
+        <button id="submitParamBtn" class="d-none">→ execute</button>
+        <div id="apiResponseLoading" class="loading-spinner d-none"></div>
+        <div id="apiResponseContent" class="d-none"></div>
+      </div>
+    </div>
+  </div>
+
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
       try {
@@ -549,116 +651,237 @@
         const responseEl = document.getElementById("apiResponseContent");
         const loadingEl = document.getElementById("apiResponseLoading");
         const urlsSection = document.querySelector(".copy-section");
-        const terminalListContainer = document.getElementById("dynamicTerminalList");
+        const terminalContainer = document.getElementById("terminalEndpointList");
+        
         let currentEndpoint = "";
         let settings = {}, apis = {};
         let OpeningApi = "Orderkuota";
 
-        // FAKE DATA REALISTIC UNTUK DEMO API (agar endpoint berfungsi dan menampilkan gambar/json)
-        const mockApis = {
-          "AI & Media": [
-            { name: "Generate QR Code", path: "/api/tools/qrcode?text=hello", desc: "Buat QR code dari teks (response image/png)" },
-            { name: "Random Cat Image", path: "/api/media/cat", desc: "Mengembalikan gambar kucing random (image/jpeg)" },
-            { name: "Random Dog Image", path: "/api/media/dog", desc: "Foto anjing lucu (image)" },
-            { name: "ChatGPT Reply", path: "/api/ai/chatgpt?prompt=Halo", desc: "AI response dummy JSON" }
-          ],
-          "Search": [
-            { name: "TikTok Search", path: "/api/search/tiktok?q=trending", desc: "Cari video tiktok (JSON)" },
-            { name: "YouTube Info", path: "/api/search/yt?q=music", desc: "Info video youtube" }
-          ],
-          "Checker": [
-            { name: "Email Validator", path: "/api/checker/email?email=test@example.com", desc: "Cek validitas email" },
-            { name: "Domain WHOIS", path: "/api/checker/domain?domain=google.com", desc: "Informasi domain" }
-          ]
-        };
-        apis = mockApis;
-        settings = { apiTitle: "SendyHost API", githubLink: "https://github.com", contactLink: "https://t.me/sendyhost", channelLink: "#" };
+        try {
+          const [settingsRes, apisRes] = await Promise.all([
+            fetch("/set"),
+            fetch("/endpoints")
+          ]);
+          settings = await settingsRes.json();
+          apis = await apisRes.json();
+        } catch (err) {
+          console.error("Gagal memuat konfigurasi API:", err);
+          document.getElementById('loading-screen').innerHTML = '<div style="color:#f87171;">Error: gagal load endpoints.</div>';
+          return;
+        }
 
-        const setContent = (id, prop, val) => { const el = document.getElementById(id); if (el) el[prop] = val; };
-        setContent("page", "textContent", "SendyHost API · Terminal Studio");
-        setContent("apiTitle", "textContent", "// SendyHost API Documentation");
-        setContent("navname", "textContent", "SendyHost API ⚡");
-        document.getElementById('github').href = settings.githubLink || '#';
-        document.getElementById('contact').href = settings.contactLink || '#';
-        document.getElementById('sourcecode').href = settings.channelLink || '#';
+        const setContent = (id, prop, val) => {
+          const el = document.getElementById(id);
+          if (el) el[prop] = val;
+        };
+        setContent("page", "textContent", "API Vault · " + (settings.apiTitle || "Docs"));
+        setContent("apiTitle", "textContent", "// " + (settings.apiTitle || "API Documentation"));
+        setContent("navname", "textContent", settings.apiTitle || "API Vault");
+
+        const chlink = document.getElementById('sourcecode');
+        if (chlink) chlink.href = settings.channelLink || '#';
+        const githublink = document.getElementById('github');
+        if (githublink) githublink.href = settings.githubLink || '#';
+        const contactlink = document.getElementById('contact');
+        if (contactlink) contactlink.href = settings.contactLink || '#';
 
         const categories = Object.keys(apis);
-        if (categories.length === 0) return;
-        categories.forEach(key => { const btn = document.createElement("button"); btn.className = "tab"; btn.dataset.tab = key; btn.textContent = key; tabsContainer.appendChild(btn); });
+        if (categories.includes(OpeningApi)) {
+          let idx = categories.indexOf(OpeningApi);
+          categories.splice(idx, 1);
+          categories.unshift(OpeningApi);
+        } else { OpeningApi = null; }
 
-        function renderTerminalFromApis() {
-          if (!terminalListContainer) return;
-          let allEndpoints = [];
-          Object.values(apis).forEach(catArr => { catArr.forEach(ep => { allEndpoints.push({ name: ep.name, path: ep.path }); }); });
-          terminalListContainer.innerHTML = allEndpoints.map(ep => `<div class="terminal-row" data-term-endpoint="${ep.path}"><div class="endpoint-method">GET</div><div class="endpoint-url-term">${ep.path}</div><div class="status-active-badge"><i class="fas fa-check-circle"></i> ACTIVE</div></div>`).join('');
-          document.querySelectorAll('.terminal-row[data-term-endpoint]').forEach(row => { row.addEventListener('click', () => { const endpoint = row.dataset.termEndpoint; const apiName = endpoint.split('/').pop() || "Endpoint"; openModalWithEndpoint(endpoint, apiName, "Terminal Quick Try"); }); });
+        if (categories.length === 0) return;
+
+        categories.forEach(key => {
+          const btn = document.createElement("button");
+          btn.className = "tab";
+          btn.dataset.tab = key;
+          btn.textContent = key;
+          tabsContainer.appendChild(btn);
+        });
+
+        // ========== Build Terminal Endpoint Chips (semua endpoint dari semua kategori) ==========
+        function buildTerminalChips() {
+          terminalContainer.innerHTML = '';
+          const allEndpoints = [];
+          for (let cat in apis) {
+            if (apis[cat] && Array.isArray(apis[cat])) {
+              apis[cat].forEach(api => {
+                if (api && api.path) {
+                  allEndpoints.push({ name: api.name, path: api.path, desc: api.desc, category: cat });
+                }
+              });
+            }
+          }
+          if (allEndpoints.length === 0) {
+            terminalContainer.innerHTML = '<span class="endpoint-chip">⚠️ no endpoints found</span>';
+            return;
+          }
+          allEndpoints.slice(0, 30).forEach(ep => {
+            const chip = document.createElement('span');
+            chip.className = 'endpoint-chip';
+            chip.innerHTML = `<i class="fas fa-link"></i> ${ep.name} → ${ep.path.length > 30 ? ep.path.substring(0, 28)+'..' : ep.path}`;
+            chip.title = `${ep.name} | ${ep.desc || 'endpoint'} | ${ep.path}`;
+            chip.addEventListener('click', (e) => {
+              e.stopPropagation();
+              // trigger modal seperti play-button
+              openApiModal(ep.path, ep.name, ep.desc);
+            });
+            terminalContainer.appendChild(chip);
+          });
+          if (allEndpoints.length > 30) {
+            let more = document.createElement('span');
+            more.className = 'endpoint-chip';
+            more.innerHTML = `<i class="fas fa-ellipsis-h"></i> +${allEndpoints.length-30} more`;
+            more.style.opacity = '0.7';
+            terminalContainer.appendChild(more);
+          }
+        }
+
+        function openApiModal(endpoint, apiName, desc) {
+          currentEndpoint = endpoint;
+          paramForm.innerHTML = "";
+          paramForm.classList.remove("d-none");
+          submitBtn.classList.add("d-none");
+          urlsSection.classList.add("d-none");
+          loadingEl.classList.add("d-none");
+          responseEl.classList.add("d-none");
+          document.querySelector(".modal-header h5").innerHTML = `<span class="method-tag">GET</span> ${apiName}`;
+          document.querySelector("#desc").textContent = desc || " ";
+          if (endpoint.includes("?")) {
+            const params = endpoint.split("?")[1].split("&");
+            params.forEach(p => {
+              const key = p.split("=")[0];
+              paramForm.innerHTML += `<input type="text" id="${key}" name="${key}" placeholder="input ${key}" required />`;
+            });
+            submitBtn.classList.remove("d-none");
+          } else {
+            fetchAPI(endpoint);
+          }
+          modal.classList.add("active");
         }
 
         function renderAPIs(category) {
           apiList.innerHTML = "";
           if (!apis[category]) return;
-          apis[category].sort((a,b)=>a.name.localeCompare(b.name)).forEach((api,i) => {
-            const card = document.createElement("div"); card.className = "api-card"; card.style.animationDelay = `${i*0.05}s`;
-            card.innerHTML = `<div class="api-info"><h3><span class="method-tag">GET</span> ${api.name}</h3>${api.desc ? `<p>${api.desc}</p>` : ""}</div><button class="play-button" data-endpoint="${api.path}" data-api="${api.name}" data-desc="${api.desc || ""}">try it <i class="fas fa-chevron-right"></i></button>`;
+          apis[category].sort((a, b) => a.name.localeCompare(b.name)).forEach((api, i) => {
+            const card = document.createElement("div");
+            card.className = "api-card";
+            card.style.animationDelay = `${i * 0.05}s`;
+            card.innerHTML = `
+              <div class="api-info">
+                <h3><span class="method-tag">GET</span> ${api.name}</h3>
+                ${api.desc ? `<p>${api.desc}</p>` : ""}
+              </div>
+              <button class="play-button" data-endpoint="${api.path}" data-api="${api.name}" data-desc="${api.desc}">
+                try it <i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
+              </button>
+            `;
             apiList.appendChild(card);
           });
         }
 
-        const defaultCategory = categories[0];
+        const defaultCategory = OpeningApi && apis[OpeningApi] ? OpeningApi : categories[0];
         renderAPIs(defaultCategory);
-        renderTerminalFromApis();
         const activeTab = [...tabsContainer.children].find(t => t.dataset.tab === defaultCategory);
-        if (activeTab) { [...tabsContainer.children].forEach(t=>t.classList.remove("active")); activeTab.classList.add("active"); }
-        tabsContainer.addEventListener("click", (e) => { const tab = e.target.closest(".tab"); if (!tab) return; [...tabsContainer.children].forEach(t=>t.classList.remove("active")); tab.classList.add("active"); renderAPIs(tab.dataset.tab); });
-
-        function openModalWithEndpoint(endpoint, apiName, desc) {
-          currentEndpoint = endpoint;
-          paramForm.innerHTML = ""; paramForm.classList.remove("d-none"); submitBtn.classList.add("d-none"); urlsSection.classList.add("d-none"); loadingEl.classList.add("d-none"); responseEl.classList.add("d-none");
-          document.querySelector(".modal-header h5").innerHTML = `<span class="method-tag">GET</span> ${apiName}`;
-          document.querySelector("#desc").textContent = desc || " ";
-          if (endpoint.includes("?")) { const params = endpoint.split("?")[1].split("&"); params.forEach(p => { const key = p.split("=")[0]; paramForm.innerHTML += `<input type="text" id="${key}" name="${key}" placeholder="input ${key}" required />`; }); submitBtn.classList.remove("d-none"); }
-          else { fetchAPI(endpoint); }
-          modal.classList.add("active");
+        if (activeTab) {
+          [...tabsContainer.children].forEach(t => t.classList.remove("active"));
+          activeTab.classList.add("active");
         }
 
-        document.addEventListener("click", (e) => { const play = e.target.closest(".play-button"); if (!play) return; openModalWithEndpoint(play.dataset.endpoint, play.dataset.api, play.dataset.desc); });
-        document.getElementById("btn-close").addEventListener("click", () => { modal.classList.remove("active"); });
+        tabsContainer.addEventListener("click", (e) => {
+          const tab = e.target.closest(".tab");
+          if (!tab) return;
+          [...tabsContainer.children].forEach(t => t.classList.remove("active"));
+          tab.classList.add("active");
+          renderAPIs(tab.dataset.tab);
+        });
+
+        document.addEventListener("click", (e) => {
+          const play = e.target.closest(".play-button");
+          if (!play) return;
+          const endpoint = play.dataset.endpoint;
+          const apiName = play.dataset.api;
+          const desc = play.dataset.desc;
+          openApiModal(endpoint, apiName, desc);
+        });
+
+        document.getElementById("btn-close").addEventListener("click", () => modal.classList.remove("active"));
         modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("active"); });
-        submitBtn.addEventListener("click", () => { if (!paramForm.checkValidity()) return paramForm.reportValidity(); paramForm.classList.add("d-none"); submitBtn.classList.add("d-none"); loadingEl.classList.remove("d-none"); let endpoint = currentEndpoint.split("?")[0] + "?"; const inputs = paramForm.querySelectorAll("input"); inputs.forEach((inp, i) => { endpoint += `${inp.name}=${encodeURIComponent(inp.value)}${i < inputs.length-1 ? "&" : ""}`; }); fetchAPI(endpoint); });
-        document.getElementById('copyUrlBtn').addEventListener('click', () => { navigator.clipboard.writeText(document.getElementById('copyEndpointText').textContent); });
-        document.getElementById('sidebar-toggle').addEventListener('click', () => { document.body.classList.toggle('sidebar-open'); });
-        document.getElementById('sidebar-overlay').addEventListener('click', () => { document.body.classList.remove('sidebar-open'); });
-        setTimeout(() => { document.getElementById('loading-screen').style.opacity = '0'; setTimeout(() => { document.getElementById('loading-screen').style.display = 'none'; document.querySelector('.container').style.display = 'block'; }, 500); }, 800);
 
-        // MOCK API RESPONSE GENERATOR (image, json, dll)
-        async function fetchAPI(endpoint) {
+        submitBtn.addEventListener("click", () => {
+          if (!paramForm.checkValidity()) return paramForm.reportValidity();
+          paramForm.classList.add("d-none");
+          submitBtn.classList.add("d-none");
+          loadingEl.classList.remove("d-none");
+          let endpoint = currentEndpoint.split("?")[0] + "?";
+          const inputs = paramForm.querySelectorAll("input");
+          inputs.forEach((inp, i) => {
+            endpoint += `${inp.name}=${encodeURIComponent(inp.value)}${i < inputs.length-1 ? "&" : ""}`;
+          });
+          fetchAPI(endpoint);
+        });
+
+        document.getElementById('copyUrlBtn').addEventListener('click', () => {
+          navigator.clipboard.writeText(document.getElementById('copyEndpointText').textContent);
+        });
+
+        document.getElementById('sidebar-toggle').addEventListener('click', () => document.body.classList.toggle('sidebar-open'));
+        document.getElementById('sidebar-overlay').addEventListener('click', () => document.body.classList.remove('sidebar-open'));
+
+        function fetchAPI(endpoint) {
           const fullURL = window.location.origin + endpoint;
-          responseEl.innerHTML = ""; responseEl.classList.add("d-none"); urlsSection.classList.remove("d-none"); loadingEl.classList.remove("d-none");
+          responseEl.innerHTML = "";
+          responseEl.classList.add("d-none");
+          urlsSection.classList.remove("d-none");
+          loadingEl.classList.remove("d-none");
           document.getElementById("copyEndpointText").textContent = fullURL;
-          await new Promise(r => setTimeout(r, 500));
-          loadingEl.classList.add("d-none");
-          // SIMULASI API: berdasarkan path mengembalikan data yang relevan
-          if (endpoint.includes("/qrcode")) {
-            const textMatch = endpoint.match(/text=([^&]+)/); const qrText = textMatch ? decodeURIComponent(textMatch[1]) : "SendyHost";
-            responseEl.innerHTML = `<div style="text-align:center"><i class="fas fa-qrcode" style="font-size:80px;color:#3b82f6"></i><p style="margin-top:8px">QR Code for: <strong>${qrText}</strong></p><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrText)}" style="border-radius:20px;margin-top:10px"></div>`;
-          } else if (endpoint.includes("/cat")) {
-            responseEl.innerHTML = `<img src="https://cataas.com/cat?t=${Date.now()}" style="max-width:100%; border-radius:24px; box-shadow:0 0 15px #3b82f6" />`;
-          } else if (endpoint.includes("/dog")) {
-            responseEl.innerHTML = `<img src="https://random.dog/woof.jpg?random=${Date.now()}" style="max-width:100%; border-radius:24px;" onerror="this.src='https://images.dog.ceo/breeds/hound-afghan/n02088094_1003.jpg'"/>`;
-          } else if (endpoint.includes("/chatgpt")) {
-            responseEl.innerHTML = `<pre>${JSON.stringify({ success: true, message: "AI Response: Halo! Ada yang bisa dibantu?", model: "gpt-3.5-turbo" }, null, 2)}</pre>`;
-          } else if (endpoint.includes("/tiktok")) {
-            responseEl.innerHTML = `<pre>${JSON.stringify({ status: 200, data: [{ id: "123", title: "Trending video", author: "user" }] }, null, 2)}</pre>`;
-          } else if (endpoint.includes("/email")) {
-            responseEl.innerHTML = `<pre>${JSON.stringify({ email: endpoint.split('=')[1] || "test", valid: true, domain: "example.com" }, null, 2)}</pre>`;
-          } else if (endpoint.includes("/domain")) {
-            responseEl.innerHTML = `<pre>${JSON.stringify({ domain: "google.com", available: false, registrar: "MarkMonitor" }, null, 2)}</pre>`;
-          } else {
-            responseEl.innerHTML = `<pre style="color:#b4d0ff">✨ Mock Response ✨\nEndpoint: ${endpoint}\nMethod: GET\nStatus: Active\nNote: Terhubung ke mock server (API berfungsi)</pre>`;
-          }
-          responseEl.classList.remove("d-none");
+          fetch(fullURL)
+            .then(async res => {
+              loadingEl.classList.add("d-none");
+              const contentType = res.headers.get("content-type") || "";
+              const data = await res.blob();
+              const blobUrl = URL.createObjectURL(data);
+              if (contentType.includes("json")) {
+                try { 
+                  const text = await data.text();
+                  const json = JSON.parse(text);
+                  responseEl.innerHTML = `<pre>${JSON.stringify(json, null, 2)}</pre>`;
+                } catch { responseEl.innerHTML = `<pre>${await data.text()}</pre>`; }
+              } else if (contentType.startsWith("image/")) {
+                responseEl.innerHTML = `<img src="${blobUrl}" style="max-width:100%; border-radius:16px;" />`;
+              } else if (contentType.startsWith("video/")) {
+                responseEl.innerHTML = `<video controls style="width:100%; border-radius:16px;"><source src="${blobUrl}" /></video>`;
+              } else if (contentType.startsWith("audio/")) {
+                responseEl.innerHTML = `<audio controls><source src="${blobUrl}" /></audio>`;
+              } else {
+                responseEl.innerHTML = `<pre>${(await data.text()).substring(0, 800)}</pre>`;
+              }
+              responseEl.classList.remove("d-none");
+            })
+            .catch(err => {
+              loadingEl.classList.add("d-none");
+              responseEl.classList.remove("d-none");
+              responseEl.innerHTML = `<pre style="color:#f87171;">Error: ${err.message}</pre>`;
+            });
         }
-      } catch (e) { document.getElementById('loading-screen').innerHTML = `<div style="color:#f87171;">Fatal: ${e}</div>`; }
+
+        // isi terminal chips setelah apis ready
+        buildTerminalChips();
+
+        setTimeout(() => {
+          document.getElementById('loading-screen').style.opacity = '0';
+          setTimeout(() => {
+            document.getElementById('loading-screen').style.display = 'none';
+            document.querySelector('.container').style.display = 'block';
+          }, 500);
+        }, 1000);
+
+      } catch (e) {
+        document.getElementById('loading-screen').innerHTML = `<div style="color:#f87171;">Fatal: ${e}</div>`;
+      }
     });
   </script>
 </body>
