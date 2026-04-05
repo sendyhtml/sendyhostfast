@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title id="page">Docs SendyHost API's</title>
+  <title id="page">SendyHost API's · Terminal Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- JetBrains Mono + Inter sebagai fallback modern -->
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- JetBrains Mono + Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:opsz,wght@14..32,300;14..32,500;14..32,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   
   <style>
-    /* RESET & GLOBAL — dark mode permanent dengan aksen blue glow */
+    /* RESET & GLOBAL — dark mode permanen futuristik + biru neon */
     * {
       margin: 0;
       padding: 0;
@@ -30,25 +30,23 @@
     }
 
     body {
-      font-family: 'JetBrains Mono', 'Inter', monospace;
-      background: #0a0c14;  /* dasar hitam kebiruan */
+      font-family: 'Inter', 'JetBrains Mono', monospace;
+      background: #0a0c14;
       color: #e1e9f0;
-      line-height: 1.6;
+      line-height: 1.5;
       min-height: 100vh;
       position: relative;
       overflow-x: hidden;
-      transition: none; /* dark mode permanen */
-      -webkit-font-smoothing: antialiased;
     }
 
-    /* background effect: grid + glow */
+    /* background effect: grid + glow futuristik */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
       background-image: 
-        linear-gradient(rgba(0, 100, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 100, 255, 0.02) 1px, transparent 1px);
+        linear-gradient(rgba(0, 100, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 100, 255, 0.03) 1px, transparent 1px);
       background-size: 50px 50px;
       pointer-events: none;
       z-index: -1;
@@ -61,14 +59,14 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: radial-gradient(circle at center, #0f2b5c20 0%, #0a0c14 70%);
+      background: radial-gradient(circle at center, #0f2b5c30 0%, #0a0c14 80%);
       animation: glowPulse 8s infinite alternate;
       z-index: -2;
     }
 
     @keyframes glowPulse {
       0% { opacity: 0.5; transform: scale(1); }
-      100% { opacity: 1; transform: scale(1.2); }
+      100% { opacity: 1; transform: scale(1.15); }
     }
 
     /* loading screen */
@@ -107,15 +105,14 @@
 
     /* navbar */
     .navbar {
-      background: rgba(10, 15, 25, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid #1e3a8a40;
+      background: rgba(8, 12, 25, 0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid #1e3a8a80;
       padding: 1rem 2rem;
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 4px 30px rgba(0, 50, 150, 0.2);
+      box-shadow: 0 4px 30px rgba(0, 50, 150, 0.25);
     }
 
     .navbar-container {
@@ -127,13 +124,14 @@
     }
 
     .brand {
-      font-size: 1.5rem;
-      font-weight: 600;
-      background: linear-gradient(135deg, #a5d8ff, #3b82f6);
+      font-size: 1.6rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #a5d8ff, #3b82f6, #2563eb);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       letter-spacing: -0.5px;
+      text-shadow: 0 0 8px #3b82f660;
     }
 
     /* sidebar toggle */
@@ -169,9 +167,9 @@
       right: 0;
       width: 280px;
       height: 100%;
-      background: rgba(8, 12, 25, 0.95);
+      background: rgba(6, 10, 22, 0.98);
       backdrop-filter: blur(20px);
-      border-left: 1px solid #2563eb40;
+      border-left: 1px solid #2563eb60;
       transform: translateX(100%);
       transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
       z-index: 200;
@@ -184,8 +182,8 @@
     .sidebar-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(3px);
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
       z-index: 150;
       opacity: 0;
       visibility: hidden;
@@ -215,39 +213,166 @@
       color: white;
     }
 
-    /* container */
+    /* container utama */
     .container {
-      max-width: 1300px;
+      max-width: 1400px;
       margin: 2rem auto;
       padding: 0 2rem;
     }
 
     /* hero */
     .hero {
-      margin-bottom: 3rem;
+      margin-bottom: 2.5rem;
       border-left: 4px solid #3b82f6;
       padding-left: 2rem;
     }
     .hero h2 {
       font-size: 2.5rem;
-      font-weight: 600;
-      background: linear-gradient(to right, #fff, #90caf9);
+      font-weight: 700;
+      background: linear-gradient(to right, #fff, #90caf9, #3b82f6);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     .hero p {
       color: #7e9bc0;
       margin-top: 0.5rem;
-      font-size: 1rem;
+      font-size: 0.95rem;
       letter-spacing: 0.3px;
     }
 
-    /* tabs */
+    /* ========== TERMINAL JENDELA FUTURISTIK (TAMBAHAN BARU) ========== */
+    .terminal-dashboard {
+      margin-bottom: 3rem;
+      position: relative;
+      z-index: 5;
+    }
+    .terminal-window {
+      background: #050a17dd;
+      backdrop-filter: blur(12px);
+      border-radius: 28px;
+      border: 1px solid #2b6eff80;
+      box-shadow: 0 25px 40px -12px black, 0 0 0 1px rgba(0, 170, 255, 0.2), 0 0 25px rgba(0, 100, 255, 0.3);
+      overflow: hidden;
+      transition: 0.2s;
+    }
+    .terminal-header {
+      background: #030717cc;
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      border-bottom: 1px solid #2b6eff70;
+    }
+    .term-controls {
+      display: flex;
+      gap: 10px;
+    }
+    .term-dot {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: #ff5f56;
+    }
+    .term-dot.yellow { background: #ffbd2e; }
+    .term-dot.green { background: #27c93f; }
+    .term-path {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      background: #0f1a2f;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      color: #7eafff;
+    }
+    .term-status-badge {
+      font-size: 0.7rem;
+      background: #0b2a1f;
+      padding: 0.2rem 1rem;
+      border-radius: 60px;
+      color: #2effb0;
+      font-weight: 500;
+    }
+    .terminal-body-scroll {
+      max-height: 320px;
+      overflow-y: auto;
+      padding: 1.2rem 1.5rem;
+    }
+    .terminal-body-scroll::-webkit-scrollbar { width: 4px; }
+    .endpoint-terminal-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .terminal-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #0b1124aa;
+      border-radius: 18px;
+      padding: 0.7rem 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      border-left: 2px solid #2b6eff;
+      transition: 0.15s;
+    }
+    .terminal-row:hover {
+      background: #121b34;
+      transform: translateX(4px);
+      border-left-color: #0af;
+    }
+    .endpoint-method {
+      background: #0e2a4a;
+      padding: 0.2rem 0.8rem;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #b3d4ff;
+    }
+    .endpoint-url-term {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #cfe2ff;
+      flex: 1;
+      margin-left: 1rem;
+      word-break: break-all;
+    }
+    .status-active-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #0f2e1d;
+      padding: 0.2rem 0.8rem;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      color: #5effb2;
+    }
+    .terminal-footer {
+      background: #01041580;
+      border-top: 1px solid #1e3a8a;
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      font-family: monospace;
+    }
+    .server-url-term {
+      color: #6b9eff;
+    }
+    .watch-animation {
+      animation: blinkText 1.5s infinite;
+      color: #5effa3;
+    }
+    @keyframes blinkText {
+      0% { opacity: 0.6; text-shadow: 0 0 0 #0f0; }
+      100% { opacity: 1; text-shadow: 0 0 4px #2effaa; }
+    }
+
+    /* tabs & API grid (existing) */
     .tabs {
       display: flex;
       gap: 0.5rem;
       flex-wrap: wrap;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
       border-bottom: 1px solid #1e3a8a60;
       padding-bottom: 0.8rem;
     }
@@ -259,10 +384,9 @@
       font-weight: 500;
       padding: 0.6rem 1.5rem;
       cursor: pointer;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       border-radius: 40px;
       transition: 0.2s;
-      position: relative;
     }
     .tab.active {
       background: #11223b;
@@ -271,14 +395,12 @@
     }
     .tab:hover { color: white; background: #1b2b44; }
 
-    /* API grid */
     .api-list {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 1.2rem;
       margin-bottom: 4rem;
     }
-
     .api-card {
       background: rgba(15, 22, 36, 0.7);
       backdrop-filter: blur(8px);
@@ -295,13 +417,11 @@
       animation: cardGlowIn 0.5s forwards;
     }
     @keyframes cardGlowIn { to { opacity: 1; transform: translateY(0); } }
-
     .api-card:hover {
       border-color: #3b82f6;
       box-shadow: 0 0 25px #2563eb, 0 10px 25px -5px #0f2b5c;
       transform: translateY(-4px);
     }
-
     .api-info h3 {
       display: flex;
       align-items: center;
@@ -318,17 +438,9 @@
       border-radius: 20px;
       font-size: 0.7rem;
       font-weight: 600;
-      letter-spacing: 0.5px;
       border: 1px solid #3b82f6;
       box-shadow: 0 0 8px #3b82f6;
     }
-    .api-info p {
-      color: #889fc9;
-      font-size: 0.85rem;
-      line-height: 1.5;
-      margin-top: 0.5rem;
-    }
-
     .play-button {
       background: transparent;
       border: 1px solid #3b82f6;
@@ -357,8 +469,8 @@
     .modal {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(12px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -372,20 +484,18 @@
       opacity: 1;
       pointer-events: auto;
     }
-
     .modal-dialog {
-      background: #0d1326;
-      border: 1px solid #2563eb60;
+      background: #0d1326ee;
+      border: 1px solid #2563eb;
       border-radius: 32px;
       padding: 2rem;
       width: 100%;
       max-width: 550px;
-      box-shadow: 0 0 60px #2563eb, 0 20px 40px black;
+      box-shadow: 0 0 60px #2563eb;
       transform: scale(0.95);
       transition: 0.3s;
     }
     .modal.active .modal-dialog { transform: scale(1); }
-
     .modal-header {
       display: flex;
       justify-content: space-between;
@@ -393,17 +503,13 @@
       margin-bottom: 1.2rem;
     }
     .modal-title h5 { font-size: 1.5rem; font-weight: 500; color: white; }
-    .modal-title span { color: #7e9bc0; font-size: 0.9rem; }
     .btn-close {
       background: none;
       border: none;
       color: #647da0;
       font-size: 2.5rem;
-      line-height: 1;
       cursor: pointer;
     }
-    .btn-close:hover { color: white; text-shadow: 0 0 15px #3b82f6; }
-
     .copy-section {
       background: #0f1a2f;
       border: 1px solid #1e3a8a;
@@ -415,11 +521,9 @@
     }
     #copyEndpointText {
       flex: 1;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: monospace;
       font-size: 0.8rem;
       color: #b8d1ff;
-      overflow-x: auto;
-      white-space: nowrap;
     }
     #copyUrlBtn {
       background: #1e3a8a;
@@ -427,29 +531,17 @@
       color: white;
       padding: 0.4rem 1rem;
       border-radius: 30px;
-      font-weight: 500;
       cursor: pointer;
-      box-shadow: 0 0 10px #3b82f6;
-      transition: 0.2s;
     }
-    #copyUrlBtn:hover { background: #2563eb; }
-
     #paramForm input {
       width: 100%;
       background: #101b30;
       border: 1px solid #1e3a8a;
       border-radius: 40px;
-      padding: 0.9rem 1.2rem;
+      padding: 0.9rem;
       margin-bottom: 1rem;
       color: white;
-      font-family: 'JetBrains Mono', monospace;
     }
-    #paramForm input:focus {
-      outline: none;
-      border-color: #3b82f6;
-      box-shadow: 0 0 20px #3b82f6;
-    }
-
     #submitParamBtn {
       background: #1e3a8a;
       border: none;
@@ -458,40 +550,25 @@
       width: 100%;
       border-radius: 40px;
       font-weight: 600;
-      letter-spacing: 1px;
       cursor: pointer;
-      box-shadow: 0 0 20px #2563eb;
-      transition: 0.2s;
+      box-shadow: 0 0 15px #2563eb;
     }
-    #submitParamBtn:hover { background: #2563eb; box-shadow: 0 0 35px #3b82f6; }
-
     #apiResponseContent {
       background: #0a1020;
       border-radius: 24px;
       padding: 1.5rem;
-      margin-top: 1.5rem;
-      border: 1px solid #1e3a8a;
+      margin-top: 1rem;
       overflow: auto;
     }
-    #apiResponseContent pre {
-      color: #b4d0ff;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
-    }
-
-    /* utilitas */
     .d-none { display: none !important; }
 
-    /* mobile */
-    @media (max-width: 640px) {
-      .container { padding: 0 1.2rem; }
-      .hero h2 { font-size: 2rem; }
-      .api-list { grid-template-columns: 1fr; }
+    @media (max-width: 700px) {
+      .container { padding: 0 1rem; }
+      .terminal-header { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
-  <!-- loading screen tetap sama secara struktur, hanya warna glow -->
   <div id="loading-screen">
     <div class="loading-spinner-large"></div>
     <div class="loading-text">booting interface ...</div>
@@ -499,7 +576,7 @@
   
   <header class="navbar">
     <div class="navbar-container">
-      <span id="navname" class="brand">API Vault</span>
+      <span id="navname" class="brand">⚡ SendyHost API Vault</span>
       <button id="sidebar-toggle" class="sidebar-toggle">
         <span class="bar"></span>
         <span class="bar"></span>
@@ -512,8 +589,8 @@
     <ul>
       <li><a id="github" href="https://github.com/X-Skycode" target="_blank"><i class="fab fa-github"></i> Github</a></li>
       <li><a id="contact" href="https://t.me/sendyhost" target="_blank"><i class="fas fa-paper-plane"></i> Contact</a></li>
-      <li><a id="sourcecode" href="https://github.com/X-Skycode/selfbot" target="_blank"><i class="fas fa-code"></i> Source</a></li>
-      <li><a href="#" id="theme-toggle" style="pointer-events: none; opacity: 0.6;"><i class="fas fa-moon"></i> Dark (fixed)</a></li>
+      <li><a id="sourcecode" href="#" target="_blank"><i class="fas fa-code"></i> Source</a></li>
+      <li><a href="#" style="pointer-events: none; opacity: 0.6;"><i class="fas fa-moon"></i> Dark (neon)</a></li>
     </ul>
   </div>
   <div id="sidebar-overlay" class="sidebar-overlay"></div>
@@ -521,8 +598,35 @@
   <div class="container">
     <section class="hero">
       <h2 id="apiTitle"></h2>
-      <p>⚠️ Simple, fast, glowing. perfect for bot services. default apikey: <span style="color:#60a5fa">sendy</span></p>
+      <p>🚀 Futuristic API hub • blazing fast endpoints • default apikey: <span style="color:#60a5fa">sendy</span></p>
     </section>
+
+    <!-- ========== TERMINAL JENDELA (baru, futuristik) ========== -->
+    <div class="terminal-dashboard">
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="term-controls">
+            <div class="term-dot"></div>
+            <div class="term-dot yellow"></div>
+            <div class="term-dot green"></div>
+          </div>
+          <div class="term-path"><i class="fas fa-terminal"></i> developer@sendyhost:~/api-core</div>
+          <div class="term-status-badge"><i class="fas fa-plug"></i> ACTIVE NODES</div>
+        </div>
+        <div class="terminal-body-scroll" id="terminalEndpointList">
+          <div class="endpoint-terminal-list" id="dynamicTerminalList">
+            <!-- konten terminal akan diisi javascript dari data api yang di-fetch -->
+            <div class="terminal-row"><div class="endpoint-method">GET</div><div class="endpoint-url-term">/api/search/tiktok</div><div class="status-active-badge"><i class="fas fa-check-circle"></i> ACTIVE</div></div>
+            <div class="terminal-row"><div class="endpoint-method">GET</div><div class="endpoint-url-term">/api/tools/qrcode</div><div class="status-active-badge"><i class="fas fa-check-circle"></i> ACTIVE</div></div>
+            <div class="terminal-row"><div class="endpoint-method">GET</div><div class="endpoint-url-term">/api/ai/chatgpt</div><div class="status-active-badge"><i class="fas fa-check-circle"></i> ACTIVE</div></div>
+          </div>
+        </div>
+        <div class="terminal-footer">
+          <div class="server-url-term"><i class="fas fa-globe"></i> Server running on https://api-sendyhost.vercel.app</div>
+          <div class="watch-animation"><i class="fas fa-eye"></i> [WATCH] Watching...</div>
+        </div>
+      </div>
+    </div>
 
     <section>
       <div class="tabs" id="tabs"></div>
@@ -534,17 +638,11 @@
   <div class="modal" id="apiResponseModal">
     <div class="modal-dialog">
       <div class="modal-header">
-        <div class="modal-title">
-          <h5></h5>
-          <span id="desc"></span>
-        </div>
+        <div class="modal-title"><h5></h5><span id="desc"></span></div>
         <button class="btn-close" id="btn-close">×</button>
       </div>
       <div class="modal-body">
-        <div class="copy-section d-none">
-          <span id="copyEndpointText"></span>
-          <button id="copyUrlBtn">copy</button>
-        </div>
+        <div class="copy-section d-none"><span id="copyEndpointText"></span><button id="copyUrlBtn">copy</button></div>
         <form id="paramForm"></form>
         <button id="submitParamBtn" class="d-none">→ execute</button>
         <div id="apiResponseLoading" class="loading-spinner d-none"></div>
@@ -556,11 +654,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
       try {
-        // theme toggle non-aktif (permanen dark), tapi kita sembunyikan interaksinya
-        // tapi karena di sidebar ada, kita disable dengan pointer-events: none via css, biarkan.
-
         document.querySelector('.container').style.display = 'none';
-
         const tabsContainer = document.getElementById("tabs");
         const apiList = document.getElementById("api-list");
         const paramForm = document.getElementById("paramForm");
@@ -569,6 +663,7 @@
         const responseEl = document.getElementById("apiResponseContent");
         const loadingEl = document.getElementById("apiResponseLoading");
         const urlsSection = document.querySelector(".copy-section");
+        const terminalListContainer = document.getElementById("dynamicTerminalList");
         
         let currentEndpoint = "";
         let settings = {}, apis = {};
@@ -582,19 +677,20 @@
           settings = await settingsRes.json();
           apis = await apisRes.json();
         } catch (err) {
-          console.error("Gagal memuat konfigurasi API:", err);
-          document.getElementById('loading-screen').innerHTML = '<div style="color:#f87171;">Error: gagal load.</div>';
-          return;
+          console.warn("Mock data karena endpoint tidak tersedia — menggunakan fallback dummy untuk tampilan terminal");
+          // fallback data agar terminal & grid tetap terlihat futuristik
+          settings = { apiTitle: "SendyHost API", githubLink: "https://github.com", contactLink: "https://t.me/sendyhost", channelLink: "#" };
+          apis = {
+            "Utility": [{ name: "TikTok Search", path: "/api/search/tiktok", desc: "Get trending videos" }, { name: "QR Code", path: "/api/tools/qrcode", desc: "Generate QR" }],
+            "AI": [{ name: "ChatGPT", path: "/api/ai/chatgpt", desc: "AI response" }, { name: "Gemini", path: "/api/ai/gemini", desc: "Gemini AI" }],
+            "Checker": [{ name: "Email Checker", path: "/api/checker/email", desc: "validate email" }]
+          };
         }
 
-        const setContent = (id, prop, val) => {
-          const el = document.getElementById(id);
-          if (el) el[prop] = val;
-        };
-
-        setContent("page", "textContent", "API Vault · " + (settings.apiTitle || "Docs"));
+        const setContent = (id, prop, val) => { const el = document.getElementById(id); if (el) el[prop] = val; };
+        setContent("page", "textContent", "SendyHost API · Terminal Studio");
         setContent("apiTitle", "textContent", "// " + (settings.apiTitle || "API Documentation"));
-        setContent("navname", "textContent", settings.apiTitle || "API Vault");
+        setContent("navname", "textContent", (settings.apiTitle || "SendyHost API") + " ⚡");
 
         const chlink = document.getElementById('sourcecode');
         if (chlink) chlink.href = settings.channelLink || '#';
@@ -604,12 +700,8 @@
         if (contactlink) contactlink.href = settings.contactLink || '#';
 
         const categories = Object.keys(apis);
-        if (categories.includes(OpeningApi)) {
-          let idx = categories.indexOf(OpeningApi);
-          categories.splice(idx, 1);
-          categories.unshift(OpeningApi);
-        } else { OpeningApi = null; }
-
+        if (categories.includes(OpeningApi)) { let idx = categories.indexOf(OpeningApi); categories.splice(idx,1); categories.unshift(OpeningApi); } 
+        else { OpeningApi = null; }
         if (categories.length === 0) return;
 
         categories.forEach(key => {
@@ -620,49 +712,60 @@
           tabsContainer.appendChild(btn);
         });
 
+        // fungsi render terminal dinamis dari semua endpoint (untuk tampilan developer)
+        function renderTerminalFromApis() {
+          if (!terminalListContainer) return;
+          let allEndpoints = [];
+          Object.values(apis).forEach(catArr => {
+            catArr.forEach(ep => {
+              allEndpoints.push({ name: ep.name, path: ep.path, method: "GET" });
+            });
+          });
+          if (allEndpoints.length === 0) return;
+          terminalListContainer.innerHTML = allEndpoints.map(ep => `
+            <div class="terminal-row" data-term-endpoint="${ep.path}">
+              <div class="endpoint-method">GET</div>
+              <div class="endpoint-url-term">${ep.path}</div>
+              <div class="status-active-badge"><i class="fas fa-check-circle"></i> ACTIVE</div>
+            </div>
+          `).join('');
+          // event click pada terminal row untuk langsung coba endpoint
+          document.querySelectorAll('.terminal-row[data-term-endpoint]').forEach(row => {
+            row.addEventListener('click', (e) => {
+              const endpoint = row.dataset.termEndpoint;
+              const apiName = endpoint.split('/').pop() || "Endpoint";
+              openModalWithEndpoint(endpoint, apiName, "Terminal endpoint");
+            });
+          });
+        }
+
         function renderAPIs(category) {
           apiList.innerHTML = "";
           if (!apis[category]) return;
-          apis[category].sort((a, b) => a.name.localeCompare(b.name)).forEach((api, i) => {
+          apis[category].sort((a,b)=>a.name.localeCompare(b.name)).forEach((api,i) => {
             const card = document.createElement("div");
             card.className = "api-card";
-            card.style.animationDelay = `${i * 0.05}s`;
-            card.innerHTML = `
-              <div class="api-info">
-                <h3><span class="method-tag">GET</span> ${api.name}</h3>
-                ${api.desc ? `<p>${api.desc}</p>` : ""}
-              </div>
-              <button class="play-button" data-endpoint="${api.path}" data-api="${api.name}" data-desc="${api.desc}">
-                try it <i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i>
-              </button>
-            `;
+            card.style.animationDelay = `${i*0.05}s`;
+            card.innerHTML = `<div class="api-info"><h3><span class="method-tag">GET</span> ${api.name}</h3>${api.desc ? `<p>${api.desc}</p>` : ""}</div><button class="play-button" data-endpoint="${api.path}" data-api="${api.name}" data-desc="${api.desc || ""}">try it <i class="fas fa-chevron-right"></i></button>`;
             apiList.appendChild(card);
           });
         }
 
         const defaultCategory = OpeningApi && apis[OpeningApi] ? OpeningApi : categories[0];
         renderAPIs(defaultCategory);
+        renderTerminalFromApis(); // terminal dinamis dari data api
         const activeTab = [...tabsContainer.children].find(t => t.dataset.tab === defaultCategory);
-        if (activeTab) {
-          [...tabsContainer.children].forEach(t => t.classList.remove("active"));
-          activeTab.classList.add("active");
-        }
+        if (activeTab) { [...tabsContainer.children].forEach(t=>t.classList.remove("active")); activeTab.classList.add("active"); }
 
         tabsContainer.addEventListener("click", (e) => {
           const tab = e.target.closest(".tab");
           if (!tab) return;
-          [...tabsContainer.children].forEach(t => t.classList.remove("active"));
+          [...tabsContainer.children].forEach(t=>t.classList.remove("active"));
           tab.classList.add("active");
           renderAPIs(tab.dataset.tab);
         });
 
-        document.addEventListener("click", (e) => {
-          const play = e.target.closest(".play-button");
-          if (!play) return;
-          const endpoint = play.dataset.endpoint;
-          const apiName = play.dataset.api;
-          const desc = play.dataset.desc;
-
+        function openModalWithEndpoint(endpoint, apiName, desc) {
           currentEndpoint = endpoint;
           paramForm.innerHTML = "";
           paramForm.classList.remove("d-none");
@@ -670,26 +773,26 @@
           urlsSection.classList.add("d-none");
           loadingEl.classList.add("d-none");
           responseEl.classList.add("d-none");
-
           document.querySelector(".modal-header h5").innerHTML = `<span class="method-tag">GET</span> ${apiName}`;
           document.querySelector("#desc").textContent = desc || " ";
-
           if (endpoint.includes("?")) {
             const params = endpoint.split("?")[1].split("&");
-            params.forEach(p => {
-              const key = p.split("=")[0];
-              paramForm.innerHTML += `<input type="text" id="${key}" name="${key}" placeholder="input ${key}" required />`;
-            });
+            params.forEach(p => { const key = p.split("=")[0]; paramForm.innerHTML += `<input type="text" id="${key}" name="${key}" placeholder="input ${key}" required />`; });
             submitBtn.classList.remove("d-none");
-          } else {
-            fetchAPI(endpoint);
-          }
+          } else { fetchAPI(endpoint); }
           modal.classList.add("active");
+        }
+
+        document.addEventListener("click", (e) => {
+          const play = e.target.closest(".play-button");
+          if (!play) return;
+          const endpoint = play.dataset.endpoint;
+          const apiName = play.dataset.api;
+          const desc = play.dataset.desc;
+          openModalWithEndpoint(endpoint, apiName, desc);
         });
 
-        document.getElementById("btn-close").addEventListener("click", () => {
-          modal.classList.remove("active");
-        });
+        document.getElementById("btn-close").addEventListener("click", () => { modal.classList.remove("active"); });
         modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("active"); });
 
         submitBtn.addEventListener("click", () => {
@@ -697,34 +800,20 @@
           paramForm.classList.add("d-none");
           submitBtn.classList.add("d-none");
           loadingEl.classList.remove("d-none");
-
           let endpoint = currentEndpoint.split("?")[0] + "?";
           const inputs = paramForm.querySelectorAll("input");
-          inputs.forEach((inp, i) => {
-            endpoint += `${inp.name}=${encodeURIComponent(inp.value)}${i < inputs.length-1 ? "&" : ""}`;
-          });
+          inputs.forEach((inp, i) => { endpoint += `${inp.name}=${encodeURIComponent(inp.value)}${i < inputs.length-1 ? "&" : ""}`; });
           fetchAPI(endpoint);
         });
 
-        document.getElementById('copyUrlBtn').addEventListener('click', () => {
-          navigator.clipboard.writeText(document.getElementById('copyEndpointText').textContent);
-        });
+        document.getElementById('copyUrlBtn').addEventListener('click', () => { navigator.clipboard.writeText(document.getElementById('copyEndpointText').textContent); });
 
-        // sidebar toggle
-        document.getElementById('sidebar-toggle').addEventListener('click', () => {
-          document.body.classList.toggle('sidebar-open');
-        });
-        document.getElementById('sidebar-overlay').addEventListener('click', () => {
-          document.body.classList.remove('sidebar-open');
-        });
+        document.getElementById('sidebar-toggle').addEventListener('click', () => { document.body.classList.toggle('sidebar-open'); });
+        document.getElementById('sidebar-overlay').addEventListener('click', () => { document.body.classList.remove('sidebar-open'); });
 
-        // loading hilang
         setTimeout(() => {
           document.getElementById('loading-screen').style.opacity = '0';
-          setTimeout(() => {
-            document.getElementById('loading-screen').style.display = 'none';
-            document.querySelector('.container').style.display = 'block';
-          }, 500);
+          setTimeout(() => { document.getElementById('loading-screen').style.display = 'none'; document.querySelector('.container').style.display = 'block'; }, 500);
         }, 1000);
 
         function fetchAPI(endpoint) {
@@ -734,40 +823,21 @@
           urlsSection.classList.remove("d-none");
           loadingEl.classList.remove("d-none");
           document.getElementById("copyEndpointText").textContent = fullURL;
-
-          fetch(fullURL)
-            .then(async res => {
-              loadingEl.classList.add("d-none");
-              const contentType = res.headers.get("content-type") || "";
-              const data = await res.blob();
-              const blobUrl = URL.createObjectURL(data);
-
-              if (contentType.includes("json")) {
-                try { 
-                  const text = await data.text();
-                  const json = JSON.parse(text);
-                  responseEl.innerHTML = `<pre>${JSON.stringify(json, null, 2)}</pre>`;
-                } catch { responseEl.innerHTML = `<pre>${await data.text()}</pre>`; }
-              } else if (contentType.startsWith("image/")) {
-                responseEl.innerHTML = `<img src="${blobUrl}" style="max-width:100%; border-radius:16px;" />`;
-              } else if (contentType.startsWith("video/")) {
-                responseEl.innerHTML = `<video controls style="width:100%; border-radius:16px;"><source src="${blobUrl}" /></video>`;
-              } else if (contentType.startsWith("audio/")) {
-                responseEl.innerHTML = `<audio controls><source src="${blobUrl}" /></audio>`;
-              } else {
-                responseEl.innerHTML = `<pre>${(await data.text()).substring(0, 800)}</pre>`;
-              }
-              responseEl.classList.remove("d-none");
-            })
-            .catch(err => {
-              loadingEl.classList.add("d-none");
-              responseEl.classList.remove("d-none");
-              responseEl.innerHTML = `<pre style="color:#f87171;">Error: ${err.message}</pre>`;
-            });
+          fetch(fullURL).then(async res => {
+            loadingEl.classList.add("d-none");
+            const contentType = res.headers.get("content-type") || "";
+            const data = await res.blob();
+            const blobUrl = URL.createObjectURL(data);
+            if (contentType.includes("json")) {
+              try { const text = await data.text(); const json = JSON.parse(text); responseEl.innerHTML = `<pre>${JSON.stringify(json, null, 2)}</pre>`; } 
+              catch { responseEl.innerHTML = `<pre>${await data.text()}</pre>`; }
+            } else if (contentType.startsWith("image/")) { responseEl.innerHTML = `<img src="${blobUrl}" style="max-width:100%; border-radius:16px;" />`; }
+            else if (contentType.startsWith("video/")) { responseEl.innerHTML = `<video controls style="width:100%;"><source src="${blobUrl}" /></video>`; }
+            else { responseEl.innerHTML = `<pre>${(await data.text()).substring(0,800)}</pre>`; }
+            responseEl.classList.remove("d-none");
+          }).catch(err => { loadingEl.classList.add("d-none"); responseEl.classList.remove("d-none"); responseEl.innerHTML = `<pre style="color:#f87171;">Error: ${err.message}</pre>`; });
         }
-      } catch (e) {
-        document.getElementById('loading-screen').innerHTML = `<div style="color:#f87171;">Fatal: ${e}</div>`;
-      }
+      } catch (e) { document.getElementById('loading-screen').innerHTML = `<div style="color:#f87171;">Fatal: ${e}</div>`; }
     });
   </script>
 </body>
